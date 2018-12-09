@@ -1,0 +1,32 @@
+﻿
+@using MVCGrid.Web
+
+@{
+    ViewBag.Icon = "pe-7s-users";
+    ViewBag.Title = "Personnel";
+    ViewBag.Message = "Manage personnel.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomJs{
+    <script src="@Url.Content("~/Scripts/Personnel/personnel.js")" type="text/javascript"></script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="panelPersonnel" class="panel panel-filled">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <a id="btn-add" class="btn btn-success btn-sm active">Add</a>
+                    </div>
+                    <div class="col-lg-10 text-right"></div>
+                </div>
+
+                @Html.MVCGrid("Personnel")
+            </div>
+        </div>
+    </div>
+</div>
+

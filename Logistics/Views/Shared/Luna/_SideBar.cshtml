@@ -1,0 +1,60 @@
+﻿
+<!-- Navigation-->
+<aside class="navigation">
+    <nav>
+        <ul class="nav luna-nav">
+            <li class="nav-category">Main</li>
+            <li id="sb-home">@Html.ActionLink("Home", "Index", "Home", new { Area = "" }, null)</li>
+            <li id="sb-appointments">@Html.ActionLink("Appointments", "Index", "Appointments", new { Area = "" }, null)</li>
+            <li id="sb-personnel">@Html.ActionLink("Personnel", "Index", "Personnel", new { Area = "" }, null)</li>
+            <li id="sb-exams">@Html.ActionLink("Exams", "Index", "Exams", new { Area = "" }, null)</li>
+
+            <li class="nav-category">Inventory</li>
+            <li id="sb-inventory">
+                <a href="#inventory" data-toggle="collapse" aria-expanded="false" class="collapsed">
+                    Management<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                </a>
+                <ul id="inventory" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
+                    <li id="sb-warehouse">@Html.ActionLink("Warehouses", "Index", "Warehouse", new { Area = "Inventory" }, null)</li>
+                    <li id="sb-bins">@Html.ActionLink("Bins", "Index", "Bins", new { Area = "Inventory" }, null)</li>
+                    <li id="sb-assets">@Html.ActionLink("Assets", "Index", "Assets", new { Area = "Inventory" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="nav-category">Configuration</li>
+            <li id="sb-config">
+                <a href="#config" data-toggle="collapse" aria-expanded="false" class="collapsed">
+                    System<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+                </a>
+                <ul id="config" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
+                    <li id="sb-lookup">@Html.ActionLink("Lookups", "Index", "Lookup", new { Area = "Config" }, null)</li>
+                    @*<li id="sb-settings">@Html.ActionLink("Settings", "Index", "Settings", new { Area = "Config" }, null)</li>*@
+                </ul>
+            </li>
+
+            @*<li class="nav-category">Access Control</li>
+        <li id="sb-access">
+            <a href="#access" data-toggle="collapse" aria-expanded="false" class="collapsed">
+                System<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
+            </a>
+            <ul id="access" class="nav nav-second collapse" aria-expanded="false" style="height: 0px;">
+                <li id="sb-users">@Html.ActionLink("Users", "Index", "Admin", new { Area = "" }, null)</li>
+            </ul>
+        </li>*@
+            
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-category">Admin Section</li>
+                <li id="sb-manage-users">@Html.ActionLink("Manage Users", "ManageUsers", "Manage", new { Area = "" }, null)</li>
+
+                <li class="nav-info">
+                    <i class="pe pe-7s-shield text-accent"></i>
+                    <div class="m-t-xs">
+                        <span class="c-white">SATIS</span> - &copy; @DateTime.Now.Year
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </nav>
+</aside>

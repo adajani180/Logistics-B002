@@ -1,0 +1,59 @@
+﻿@using Logistics.Models
+
+@model LoginViewModel
+
+@{
+    ViewBag.Icon = "pe-7s-unlock";
+    ViewBag.Title = "Login";
+    ViewBag.Message = "Please enter your credentials to login.";
+}
+
+<div class="view-header">
+    <div class="header-icon">
+        <i class="pe page-header-icon pe-7s-unlock"></i>
+    </div>
+    <div class="header-title">
+        <h3>Login</h3>
+        <small>
+            Please enter your credentials to login.
+        </small>
+    </div>
+</div>
+
+<div class="panel panel-filled">
+    <div class="panel-body">
+        @*@Html.ValidationSummary(true, "Login failed! Check your credentials.", new { @class = "text-danger" })*@
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "frmLogin" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="control-label" for="UserName">Username</label>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", required = "required", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                <span class="help-block small">Your unique username</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="PasswordHash">Password</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <span class="help-block small">Your strong password</span>
+            </div>
+            <div>
+                <button id="btn-login" class="btn btn-accent mb-1em">Login</button>
+            </div>
+
+            @* TODO: Enable these if we start using these functionalities
+            <p>
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </p>
+            <p>
+                @Html.ActionLink("Need to register?", "Register")
+            </p>*@
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

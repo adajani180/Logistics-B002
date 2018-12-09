@@ -1,0 +1,181 @@
+﻿@model Logistics.Areas.Inventory.Entities.Asset
+
+@{
+    ViewBag.Icon = "pe-7s-albums";
+    ViewBag.Title = "Asset Details";
+    ViewBag.Message = "Add, edit and view asset details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomCss{
+    <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/plugins/datepicker/css")" rel="stylesheet" type="text/css" />
+    <style>
+        .dow, .datepicker-switch, .next, .prev, .clear 
+        { 
+            color: black;
+        }
+    </style>
+}
+
+@section CustomJs{
+    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/plugins/datepicker/js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sb-inventory").toggleClass("active");
+            $("#sb-assets").toggleClass("active");
+
+            //$("#dateacquired-container input").datepicker({
+            //$("#datetimepicker1").datepicker({
+            $("#DateAcquired-Container input").datepicker({
+                format: "mm/dd/yyyy",
+                todayHighlight: true,
+                //orientation: "bottom auto",
+                autoclose: true,
+                clearBtn: true
+            });
+        });
+
+        $(document).on("click", "#btn-save", function (e) {
+
+            var $form = $("#frmAsset");
+            $form.validator();
+            $form.validator("validate");
+
+            var isValid = isFormValid("#frmAsset");
+            if (!isValid) {
+                e.preventDefault();
+                return false;
+            }
+
+            $(this).text("Saving...");
+            $(this).attr("disabled", "disabled");
+
+            var asset = {
+                Id: $("#Id").val(),
+                Name: $("#Name").val(),
+                Description: $("#Description").val(),
+                WarehouseId: $("#WarehouseId").val(),
+                BinId: $("#BinId").val(),
+                TypeLookupId: $("#TypeLookupId").val(),
+                Manufacturer: $("#Manufacturer").val(),
+                SerialNumber: $("#SerialNumber").val(),
+                Quantity: $("#Quantity").val(),
+                Price: $("#Price").val(),
+                DateAcquired: $("#DateAcquired").val(),
+                Threshold: $("#Threshold").val(),
+                Notes: $("#Notes").val()
+            };
+
+            $.ajax({
+                type: "post",
+                url: "/Inventory/Assets/Save",
+                data: asset,
+                success: function (result) {
+                    displayMessage(result);
+                },
+                complete: function () {
+                    window.location = "@Url.Action("Index", "Assets", new { Area = "Inventory" })";
+                }
+            });
+        });
+    </script>
+    @*<script src="@Url.Content("~/Scripts/Inventory/asset.js")" type="text/javascript"></script>*@
+}
+
+<div class="row">
+    <div>
+        <div class="panel panel-filled">
+            <div class="panel-body">
+                @using (Html.BeginForm("Details", "Assets", new { Area = "Inventory" }, FormMethod.Post, new { @id = "frmAsset" }))
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-3 control-label">Name</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Description" class="col-sm-3 control-label">Description</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Description, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Manufacturer" class="col-sm-3 control-label">Manufacturer</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Manufacturer, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="SerialNumber" class="col-sm-3 control-label">Serial Number</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="WarehouseId" class="col-sm-3 control-label">Warehouse</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("WarehouseId", ViewBag.ListOfWarehouses as IEnumerable<SelectListItem>, "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="BinId" class="col-sm-3 control-label">Bin</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("BinId", ViewBag.ListOfBins as IEnumerable<SelectListItem>, "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="TypeLookupId" class="col-sm-3 control-label">Asset Type</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("TypeLookupId", ViewBag.ListOfAssetTypes as IEnumerable<SelectListItem>, "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Notes" class="col-sm-3 control-label">Notes</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Notes, new { @class = "form-control" })</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Date Acquired</label>
+                                    <div class="col-sm-9" id="DateAcquired-Container">
+                                        @Html.TextBoxFor(model => model.DateAcquired, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Quantity" class="col-sm-3 control-label">Quantity</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Price" class="col-sm-3 control-label">Price</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Price, "{0:0.00}", new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Issued" class="col-sm-3 control-label">Issued</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Issued, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Threshold" class="col-sm-3 control-label">Threshold</label>
+                                    <div class="col-sm-9">@Html.TextBoxFor(model => model.Threshold, new { @class = "form-control" })</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9">
+                                    @Html.ActionLink("Close", "Index", "Assets", new { Area = "Inventory" }, new { @class = "btn btn-default" })
+                                    <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

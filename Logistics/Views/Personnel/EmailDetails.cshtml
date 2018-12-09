@@ -1,0 +1,50 @@
+﻿@model Logistics.Entities.Contact.EmailAddress
+
+@{
+    ViewBag.Icon = "pe-7s-mail";
+    ViewBag.Title = "Email Details";
+    ViewBag.Message = "Add, edit and view email details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomJs{
+    <script src="@Url.Content("~/Scripts/Personnel/email.js")" type="text/javascript"></script>
+}
+
+@using (Html.BeginForm("EmailDetails", "Personnel", FormMethod.Post, new { @id = "frmEmail" }))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PersonId)
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <h4 class="m-b-xs">@(Model.Person.FullName)</h4>
+                    <hr />
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="TypeLookupId" class="col-sm-2 control-label">Email Type</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("TypeLookupId", ViewBag.ListOfAddressTypes as IEnumerable<SelectListItem>, "", new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">@Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })</div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-10">
+                                <a id="btn-close" class="btn btn-default" title="Save">Close</a>
+                                <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

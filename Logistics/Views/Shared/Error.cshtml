@@ -1,0 +1,23 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<div style="margin-left:-125px;">
+    <div class="view-header">
+        <div class="header-icon">
+            <i class="pe page-header-icon pe-7s-close-circle"></i>
+        </div>
+        <div class="header-title">
+            <h3>@ViewBag.Title</h3>
+            <small>An error occurred while processing your request.</small>
+        </div>
+    </div>
+
+    <div class="panel panel-filled">
+        <div class="panel-body">
+            @Model.Exception.Message
+        </div>
+    </div>
+</div>

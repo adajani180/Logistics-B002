@@ -1,0 +1,69 @@
+﻿@using Logistics.Helpers
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SATIS</title>
+    <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/luna/css")" rel="stylesheet" type="text/css" />
+
+    @if (IsSectionDefined("AddCalendarCss"))
+    {
+        @RenderSection("AddCalendarCss", required: false)
+    }
+    @if (IsSectionDefined("CustomCss"))
+    {
+        @RenderSection("CustomCss", required: false)
+    }
+
+</head>
+
+<body>
+
+    <!-- Wrapper-->
+
+    <div class="wrapper">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            Html.RenderPartial("~/Views/Shared/Luna/_Header.cshtml");
+            Html.RenderPartial("~/Views/Shared/Luna/_SideBar.cshtml");
+        }
+        
+        <!-- Main content-->
+        <section class="content">
+
+            @Html.Raw(User.Identity.IsAuthenticated ? "<div class='container-fluid'>" : "<div class='container-center animated slideInDown'>")
+
+                @RenderBody()
+
+            </div>
+
+            @{Html.RenderPartial("~/Views/Shared/Luna/_Footer.cshtml");}
+
+         </section>
+
+
+
+    </div>
+    <!-- End wrapper-->
+
+    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/luna/js")"></script>
+    <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/plugins")"></script>
+    <script src="~/MVCGridHandler.axd/script.js"></script>
+    @RenderSection("scripts", required: false)
+    @{Html.RenderPartial("_Messages");}
+
+    @if (IsSectionDefined("AddCalendarJs"))
+    {
+        @RenderSection("AddCalendarJs", required: false)
+    }
+    @if (IsSectionDefined("CustomJs"))
+    {
+        @RenderSection("CustomJs", required: false)
+    }
+    </div>
+
+</body>
+</html>

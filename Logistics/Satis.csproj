@@ -1,0 +1,1574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9DB3505F-55D5-4958-88E3-92C47C466097}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Logistics</RootNamespace>
+    <AssemblyName>Logistics</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.8.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.8.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.8.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.8.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.8.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.4\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="MVCGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVCGrid.Net.1.0.0.61\lib\net40\MVCGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MVCGridConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Config\ConfigAreaRegistration.cs" />
+    <Compile Include="Areas\Config\Controllers\LookupController.cs" />
+    <Compile Include="Areas\Config\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\BinsController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\AssetsController.cs" />
+    <Compile Include="Areas\Inventory\Controllers\WarehouseController.cs" />
+    <Compile Include="Areas\Inventory\Entities\Asset.cs" />
+    <Compile Include="Areas\Inventory\Entities\Bin.cs" />
+    <Compile Include="Areas\Inventory\InventoryAreaRegistration.cs" />
+    <Compile Include="Areas\Inventory\Models\InventoryContext.cs" />
+    <Compile Include="Areas\Inventory\Entities\Warehouse.cs" />
+    <Compile Include="Areas\Inventory\Repositories\AssetRepository.cs" />
+    <Compile Include="Areas\Inventory\Repositories\BinRepository.cs" />
+    <Compile Include="Areas\Inventory\Repositories\WarehouseRepository.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ExamsController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\Appointment\Appointment.cs" />
+    <Compile Include="Entities\Appointment\AppointmentSchedule.cs" />
+    <Compile Include="Entities\Appointment\CalendarEvent.cs" />
+    <Compile Include="Areas\Config\Entities\ConfigLookup.cs" />
+    <Compile Include="Entities\Contact\Address.cs" />
+    <Compile Include="Entities\Contact\EmailAddress.cs" />
+    <Compile Include="Entities\Contact\Phone.cs" />
+    <Compile Include="Entities\Error\ErrorLog.cs" />
+    <Compile Include="Entities\Exam\Exam.cs" />
+    <Compile Include="Entities\Exam\ExamResult.cs" />
+    <Compile Include="Entities\Personnel\Person.cs" />
+    <Compile Include="Exceptions\SessionExpiredException.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Helpers\ErrorLogHelper.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\MiscHelper.cs" />
+    <Compile Include="Helpers\SessionHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ErrorLogContext.cs" />
+    <Compile Include="Models\AdminContext.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonnelController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Access\SystemUser.cs" />
+    <Compile Include="Models\ExamContext.cs" />
+    <Compile Include="Models\AppointmentContext.cs" />
+    <Compile Include="Areas\Config\Models\ConfigLookupContext.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PersonnelContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ErrorLogRepository.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
+    <Compile Include="Repositories\Appointment\AppointmentScheduleRepository.cs" />
+    <Compile Include="Repositories\Appointment\AppointmentRepository.cs" />
+    <Compile Include="Areas\Config\Repositories\LookupRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamResultRepository.cs" />
+    <Compile Include="Repositories\Exam\ExamRepository.cs" />
+    <Compile Include="Repositories\Interface\IRepository.cs" />
+    <Compile Include="Repositories\Personnel\PhoneRepository.cs" />
+    <Compile Include="Repositories\Personnel\EmailRepository.cs" />
+    <Compile Include="Repositories\Personnel\AddressRepository.cs" />
+    <Compile Include="Repositories\Personnel\PersonnelRepository.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Config\Views\Lookup\Details.cshtml" />
+    <Content Include="Areas\Inventory\Views\web.config" />
+    <Content Include="Areas\Inventory\Views\_ViewStart.cshtml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugins\bootbox\bootbox.min.js" />
+    <Content Include="Plugins\datepicker\css\bootstrap-datepicker3.min.css" />
+    <Content Include="Plugins\datepicker\js\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\Appointment\appointment-cal.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\Exam\exam.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Personnel\exam.js" />
+    <Content Include="Scripts\Personnel\phone.js" />
+    <Content Include="Scripts\Personnel\address.js" />
+    <Content Include="Scripts\Personnel\email.js" />
+    <Content Include="Scripts\Personnel\personnel.js" />
+    <Content Include="Scripts\Appointment\details.js" />
+    <Content Include="Scripts\Appointment\appointment.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\satis.js" />
+    <Content Include="Plugins\calendar\css\fullcalendar.css" />
+    <Content Include="Plugins\calendar\css\fullcalendar.min.css" />
+    <Content Include="Plugins\calendar\css\fullcalendar.print.css" />
+    <Content Include="Plugins\calendar\js\fullcalendar.js" />
+    <Content Include="Plugins\calendar\js\fullcalendar.min.js" />
+    <Content Include="Plugins\calendar\js\gcal.js" />
+    <Content Include="Plugins\calendar\js\lang-all.js" />
+    <Content Include="Plugins\validator\validator.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Themes\Luna\scripts\luna.js" />
+    <Content Include="Themes\Luna\styles\pe-icons\helper.css" />
+    <Content Include="Themes\Luna\styles\pe-icons\pe-icon-7-stroke.css" />
+    <Content Include="Themes\Luna\styles\pe-icons\Pe-icon-7-stroke.svg" />
+    <Content Include="Themes\Luna\styles\stroke-icons\stroke.svg" />
+    <Content Include="Themes\Luna\styles\stroke-icons\style.css" />
+    <Content Include="Themes\Luna\styles\style.css" />
+    <Content Include="Themes\Luna\vendor\animate.css\animate.css" />
+    <Content Include="Themes\Luna\vendor\bootstrap3-typeahead\bootstrap3-typeahead.min.js" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Themes\Luna\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Themes\Luna\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Themes\Luna\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Themes\Luna\vendor\bootstrap\js\npm.js" />
+    <Content Include="Themes\Luna\vendor\chart.js\dist\Chart.min.js" />
+    <Content Include="Themes\Luna\vendor\d3\d3.min.js" />
+    <Content Include="Themes\Luna\vendor\datamaps\datamaps.world.min.js" />
+    <Content Include="Themes\Luna\vendor\datatables\datatables.min.css" />
+    <Content Include="Themes\Luna\vendor\datatables\datatables.min.js" />
+    <Content Include="Themes\Luna\vendor\flot\jquery.flot.min.js" />
+    <Content Include="Themes\Luna\vendor\flot\jquery.flot.pie.min.js" />
+    <Content Include="Themes\Luna\vendor\flot\jquery.flot.resize.min.js" />
+    <Content Include="Themes\Luna\vendor\flot\jquery.flot.spline.js" />
+    <Content Include="Themes\Luna\vendor\flot\jquery.flot.time.min.js" />
+    <Content Include="Themes\Luna\vendor\fontawesome\css\font-awesome.css" />
+    <Content Include="Themes\Luna\vendor\fontawesome\css\font-awesome.min.css" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\AUTHORS.txt" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\jquery-ui.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\LICENSE.txt" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\accordion.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\all.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\autocomplete.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\base.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\button.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\core.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\datepicker.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\dialog.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\draggable.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\menu.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\progressbar.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\resizable.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\selectable.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\selectmenu.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\slider.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\sortable.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\spinner.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\tabs.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\base\tooltip.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_diagonals-thick_8_333333_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_flat_65_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_glass_40_111111_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_glass_55_1c1c1c_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_highlight-hard_100_f9f9f9_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_highlight-hard_40_aaaaaa_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_highlight-soft_50_aaaaaa_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_inset-hard_45_cd0a0a_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-bg_inset-hard_55_ffeb80_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_4ca300_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_ededed_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_ffcf29_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\black-tie\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_flat_0_333333_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_flat_65_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_glass_55_fbf8ee_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_highlight-hard_100_eeeeee_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-bg_highlight-soft_15_cc0000_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-icons_004276_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\blitzer\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\cupertino\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_highlight-soft_33_003147_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_highlight-soft_35_222222_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_highlight-soft_44_444444_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-bg_loop_25_000000_21x21.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dark-hive\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_diagonals-thick_15_0b3e6f_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_dots-medium_30_0b58a2_4x4.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_dots-small_20_333333_2x2.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_dots-small_30_a32d00_2x2.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_dots-small_40_00498f_2x2.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_flat_40_292929_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-bg_gloss-wave_20_111111_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-icons_00498f_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-icons_98d2fb_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-icons_9ccdfc_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\dot-luv\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_flat_55_994d53_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_flat_55_fafafa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_gloss-wave_30_3d3644_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_highlight-soft_100_dcd9de_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_highlight-soft_100_eae6ea_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_highlight-soft_25_30273a_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-bg_highlight-soft_45_5f5964_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_734d99_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_8d78a5_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_a8a3ae_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_ebccce_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\eggplant\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_diagonals-small_25_c5ddfc_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_diagonals-thick_20_e69700_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_diagonals-thick_22_1484e6_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_diagonals-thick_26_2293f7_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_flat_0_e69700_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_flat_0_e6b900_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_highlight-soft_100_f9f9f9_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-bg_inset-hard_100_eeeeee_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-icons_0a82eb_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-icons_0b54d5_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-icons_5fa5e3_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-icons_fcdd4a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\excite-bike\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-icons_0073ea_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-icons_666666_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-icons_ff0084_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\flick\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_diagonals-small_40_db4865_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_diagonals-small_50_93c3cd_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_diagonals-small_50_ff3853_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_diagonals-small_75_ccd232_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_dots-medium_80_ffff38_4x4.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_dots-small_35_35414f_2x2.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_flat_75_ba9217_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-bg_white-lines_85_f7f7ba_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_88a206_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_c02669_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_e1e463_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_ffeb33_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\hot-sneaks\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_glass_100_f5f0e5_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_glass_25_cb842e_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_glass_70_ede4d4_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_c47a23_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_cb672b_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_f08000_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_f35f07_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\humanity\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_highlight-hard_30_285c00_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_highlight-soft_33_3a8104_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_highlight-soft_50_4eb305_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_highlight-soft_60_4ca20b_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-bg_inset-soft_10_285c00_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-icons_4eb305_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-icons_72b42d_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\le-frog\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_glass_15_5f391b_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_gloss-wave_20_1c160d_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_gloss-wave_25_453326_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_gloss-wave_30_44372c_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_highlight-soft_20_201913_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_highlight-soft_20_619226_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-bg_inset-soft_10_201913_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_9bcc60_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_add978_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_e3ddc9_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_f1fd86_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\mint-choc\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_flat_55_c0402a_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_flat_55_eeeeee_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_glass_100_f8f8f8_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_glass_35_dddddd_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_glass_60_eeeeee_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_inset-hard_75_999999_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-bg_inset-soft_50_c9c9c9_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-icons_3383bb_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-icons_70b2e1_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-icons_999999_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\images\ui-icons_fbc856_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\overcast\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_diagonal-maze_20_6e4f1c_10x10.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_diagonal-maze_40_000000_10x10.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_10_eceadf_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_10_f8f7f6_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_15_eceadf_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_15_f7f3de_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_15_ffffff_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_65_654b24_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-bg_fine-grain_68_b83400_60x60.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_3572ac_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_8c291d_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_b83400_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_fbdb93_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\pepper-grinder\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\redmond\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\smoothness\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_gloss-wave_100_ece8da_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-hard_100_f5f3e5_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-hard_100_fafaf4_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-hard_15_459e00_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-hard_95_cccccc_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-soft_25_67b021_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_highlight-soft_95_ffedad_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-bg_inset-soft_15_2b2922_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_808080_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_847e71_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_8DC262_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_eeeeee_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\south-street\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\start\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_d19405_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_eb990f_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\sunny\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_10_4f4221_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_20_372806_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_25_675423_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_25_d5ac5d_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_8_261803_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_diamond_8_443113_10x8.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_flat_75_ddd4b0_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_070603_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_e8e2b5_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_e9cd86_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_efec9f_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_f2ec64_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_f9f2bd_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\swanky-purse\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_diagonals-small_50_262626_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_flat_0_303030_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_flat_0_4c4c4c_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_glass_40_0a0a0a_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_glass_55_f1fbe5_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_glass_60_000000_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_gloss-wave_55_000000_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_gloss-wave_85_9fda58_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-bg_gloss-wave_95_f6ecd5_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_000000_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_1f1f1f_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_9fda58_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_b8ec79_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\trontastic\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_inset-soft_25_000000_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-bg_inset-soft_30_f58400_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-darkness\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\ui-lightness\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\animated-overlay.gif" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_gloss-wave_16_121212_500x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_highlight-hard_15_888888_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_highlight-hard_55_555555_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_highlight-soft_35_adadad_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_highlight-soft_60_dddddd_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-bg_inset-soft_15_121212_1x100.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_666666_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_aaaaaa_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_c98000_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\images\ui-icons_f29a00_256x240.png" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\jquery-ui.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\jquery-ui.min.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\themes\vader\theme.css" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\accordion.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\autocomplete.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\button.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\core.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\datepicker.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\dialog.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\draggable.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\droppable.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-blind.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-bounce.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-clip.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-drop.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-explode.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-fade.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-fold.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-highlight.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-puff.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-pulsate.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-scale.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-shake.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-size.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-slide.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect-transfer.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\effect.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-af.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ar-DZ.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ar.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-az.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-be.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-bg.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-bs.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ca.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-cs.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-cy-GB.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-da.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-de.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-el.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-en-AU.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-en-GB.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-en-NZ.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-eo.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-es.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-et.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-eu.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fa.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fi.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fo.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fr-CA.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fr-CH.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-fr.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-gl.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-he.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-hi.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-hr.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-hu.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-hy.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-id.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-is.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-it-CH.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-it.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ja.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ka.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-kk.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-km.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ko.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ky.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-lb.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-lt.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-lv.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-mk.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ml.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ms.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-nb.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-nl-BE.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-nl.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-nn.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-no.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-pl.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-pt-BR.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-pt.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-rm.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ro.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ru.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sk.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sl.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sq.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sr-SR.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sr.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-sv.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-ta.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-th.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-tj.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-tr.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-uk.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-vi.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-zh-CN.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-zh-HK.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\i18n\datepicker-zh-TW.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\menu.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\accordion.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\autocomplete.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\button.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\core.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\datepicker.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\dialog.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\draggable.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\droppable.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-blind.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-bounce.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-clip.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-drop.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-explode.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-fade.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-fold.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-highlight.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-puff.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-pulsate.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-scale.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-shake.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-size.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-slide.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect-transfer.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\effect.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-af.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ar-DZ.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ar.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-az.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-be.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-bg.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-bs.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ca.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-cs.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-cy-GB.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-da.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-de.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-el.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-en-AU.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-en-GB.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-en-NZ.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-eo.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-es.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-et.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-eu.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fa.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fi.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fo.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fr-CA.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fr-CH.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-fr.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-gl.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-he.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-hi.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-hr.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-hu.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-hy.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-id.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-is.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-it-CH.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-it.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ja.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ka.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-kk.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-km.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ko.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ky.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-lb.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-lt.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-lv.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-mk.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ml.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ms.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-nb.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-nl-BE.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-nl.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-nn.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-no.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-pl.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-pt-BR.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-pt.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-rm.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ro.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ru.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sk.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sl.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sq.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sr-SR.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sr.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-sv.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-ta.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-th.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-tj.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-tr.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-uk.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-vi.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-zh-CN.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-zh-HK.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\i18n\datepicker-zh-TW.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\menu.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\mouse.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\position.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\progressbar.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\resizable.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\selectable.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\selectmenu.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\slider.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\sortable.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\spinner.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\tabs.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\tooltip.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\minified\widget.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\mouse.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\position.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\progressbar.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\resizable.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\selectable.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\selectmenu.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\slider.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\sortable.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\spinner.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\tabs.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\tooltip.js" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\widget.js" />
+    <Content Include="Themes\Luna\vendor\jquery\AUTHORS.txt" />
+    <Content Include="Themes\Luna\vendor\jquery\dist\jquery.js" />
+    <Content Include="Themes\Luna\vendor\jquery\dist\jquery.min.js" />
+    <Content Include="Themes\Luna\vendor\jquery\LICENSE.txt" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\jsonp.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\load.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\parseJSON.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\parseXML.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\script.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\var\location.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\var\nonce.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\var\rquery.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\ajax\xhr.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes\attr.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes\classes.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes\prop.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\attributes\val.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\callbacks.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\access.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\init.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\parseHTML.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\ready.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\addGetHookIf.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\adjustCSS.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\curCSS.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\defaultDisplay.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\showHide.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\cssExpand.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\getStyles.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\isHidden.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\rmargin.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\css\var\swap.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\accepts.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\Data.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\var\acceptData.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\var\dataPriv.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\data\var\dataUser.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\deferred.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\deprecated.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\dimensions.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\effects.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\effects\animatedSelector.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\effects\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\effects\Tween.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event\ajax.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event\alias.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event\focusin.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\event\trigger.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\exports\amd.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\exports\global.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\intro.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\jquery.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\createSafeFragment.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\getAll.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\var\nodeNames.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\var\rleadingWhitespace.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\offset.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\outro.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\queue.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\queue\delay.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\selector-native.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\selector-sizzle.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\selector.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\serialize.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\traversing.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\traversing\findFilter.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\traversing\var\dir.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\traversing\var\siblings.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\arr.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\class2type.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\concat.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\deletedIds.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\document.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\documentElement.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\hasOwn.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\indexOf.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\pnum.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\push.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\rcssNum.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\rnotwhite.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\slice.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\support.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\var\toString.js" />
+    <Content Include="Themes\Luna\vendor\jquery\src\wrap.js" />
+    <Content Include="Themes\Luna\vendor\moment\benchmarks\clone.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\af.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ar-ma.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ar-sa.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ar-tn.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ar.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\az.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\be.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\bg.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\bn.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\bo.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\br.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\bs.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ca.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\cs.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\cv.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\cy.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\da.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\de-at.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\de.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\el.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\en-au.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\en-ca.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\en-gb.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\eo.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\es.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\et.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\eu.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fa.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fi.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fo.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fr-ca.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fr.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\fy.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\gl.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\he.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\hi.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\hr.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\hu.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\hy-am.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\id.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\is.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\it.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ja.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ka.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\km.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ko.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\lb.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\lt.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\lv.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\mk.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ml.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\mr.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ms-my.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\my.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\nb.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ne.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\nl.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\nn.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\pl.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\pt-br.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\pt.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ro.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ru.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sk.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sl.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sq.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sr-cyrl.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sr.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\sv.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\ta.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\th.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\tl-ph.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\tr.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\tzm-latn.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\tzm.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\uk.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\uz.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\vi.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\zh-cn.js" />
+    <Content Include="Themes\Luna\vendor\moment\locale\zh-tw.js" />
+    <Content Include="Themes\Luna\vendor\moment\meteor\export.js" />
+    <Content Include="Themes\Luna\vendor\moment\meteor\test.js" />
+    <Content Include="Themes\Luna\vendor\moment\min\locales.js" />
+    <Content Include="Themes\Luna\vendor\moment\min\locales.min.js" />
+    <Content Include="Themes\Luna\vendor\moment\min\moment-with-locales.js" />
+    <Content Include="Themes\Luna\vendor\moment\min\moment-with-locales.min.js" />
+    <Content Include="Themes\Luna\vendor\moment\min\moment.min.js" />
+    <Content Include="Themes\Luna\vendor\moment\moment.js" />
+    <Content Include="Themes\Luna\vendor\nestable\jquery.nestable.js" />
+    <Content Include="Themes\Luna\vendor\pacejs\pace.min.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\css\select2.css" />
+    <Content Include="Themes\Luna\vendor\select2\dist\css\select2.min.css" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ar.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\az.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\bg.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ca.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\cs.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\da.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\de.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\el.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\en.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\es.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\et.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\eu.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\fa.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\fi.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\fr.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\gl.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\he.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\hi.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\hr.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\hu.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\id.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\is.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\it.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ja.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\km.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ko.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\lt.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\lv.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\mk.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ms.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\nb.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\nl.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\pl.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\pt-BR.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\pt.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ro.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\ru.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\sk.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\sr-Cyrl.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\sr.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\sv.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\th.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\tr.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\uk.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\vi.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\zh-CN.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\i18n\zh-TW.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\select2.full.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\select2.full.min.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\select2.js" />
+    <Content Include="Themes\Luna\vendor\select2\dist\js\select2.min.js" />
+    <Content Include="Themes\Luna\vendor\sparkline\index.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ar-AR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ar-AR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-bg-BG.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-bg-BG.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ca-ES.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ca-ES.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-cs-CZ.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-cs-CZ.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-da-DK.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-da-DK.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-de-DE.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-de-DE.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-es-ES.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-es-ES.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-es-EU.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-es-EU.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fa-IR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fa-IR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fi-FI.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fi-FI.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fr-FR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-fr-FR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-gl-ES.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-gl-ES.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-he-IL.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-he-IL.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-hr-HR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-hr-HR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-hu-HU.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-hu-HU.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-id-ID.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-id-ID.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-it-IT.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-it-IT.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ja-JP.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ja-JP.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ko-KR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ko-KR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-lt-LT.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-lt-LT.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-lt-LV.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-lt-LV.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-nb-NO.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-nb-NO.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-nl-NL.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-nl-NL.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pl-PL.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pl-PL.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pt-BR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pt-BR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pt-PT.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-pt-PT.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ro-RO.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ro-RO.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ru-RU.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-ru-RU.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sk-SK.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sk-SK.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sl-SI.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sl-SI.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sr-RS-Latin.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sr-RS.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sr-RS.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sv-SE.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-sv-SE.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-th-TH.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-th-TH.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-tr-TR.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-tr-TR.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-uk-UA.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-uk-UA.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-vi-VN.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-vi-VN.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-zh-CN.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-zh-CN.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-zh-TW.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\lang\summernote-zh-TW.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\databasic\summernote-ext-databasic.css" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\databasic\summernote-ext-databasic.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\databasic\summernote-ext-databasic.min.css" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\databasic\summernote-ext-databasic.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\hello\summernote-ext-hello.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\hello\summernote-ext-hello.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\specialchars\summernote-ext-specialchars.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\plugin\specialchars\summernote-ext-specialchars.min.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\summernote.css" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\summernote.js" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\summernote.min.js" />
+    <Content Include="Themes\Luna\vendor\switchery\switchery.min.css" />
+    <Content Include="Themes\Luna\vendor\switchery\switchery.min.js" />
+    <Content Include="Themes\Luna\vendor\toastr\toastr.css" />
+    <Content Include="Themes\Luna\vendor\toastr\toastr.min.css" />
+    <Content Include="Themes\Luna\vendor\toastr\toastr.min.js" />
+    <Content Include="Themes\Luna\vendor\topojson\topojson.min.js" />
+    <Content Include="Views\Appointments\Index.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Luna\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Themes\Luna\api\typehead_collection.json" />
+    <Content Include="Themes\Luna\styles\pe-icons\Pe-icon-7-stroke.eot" />
+    <Content Include="Themes\Luna\styles\pe-icons\Pe-icon-7-stroke.ttf" />
+    <Content Include="Themes\Luna\styles\pe-icons\Pe-icon-7-stroke.woff" />
+    <Content Include="Themes\Luna\styles\stroke-icons\stroke.eot" />
+    <Content Include="Themes\Luna\styles\stroke-icons\stroke.ttf" />
+    <Content Include="Themes\Luna\styles\stroke-icons\stroke.woff" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Themes\Luna\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Themes\Luna\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Themes\Luna\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Themes\Luna\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Themes\Luna\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Themes\Luna\vendor\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\.bower.json" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\bower.json" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\component.json" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\composer.json" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\package.json" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\README.md" />
+    <Content Include="Themes\Luna\vendor\jquery-ui\ui\.jshintrc" />
+    <Content Include="Themes\Luna\vendor\jquery\.bower.json" />
+    <Content Include="Themes\Luna\vendor\jquery\bower.json" />
+    <Content Include="Themes\Luna\vendor\jquery\dist\jquery.min.map" />
+    <Content Include="Themes\Luna\vendor\jquery\README.md" />
+    <Content Include="Themes\Luna\vendor\jquery\src\.jshintrc" />
+    <Content Include="Themes\Luna\vendor\moment\.bower.json" />
+    <Content Include="Themes\Luna\vendor\moment\bower.json" />
+    <Content Include="Themes\Luna\vendor\moment\CHANGELOG.md" />
+    <Content Include="Themes\Luna\vendor\moment\LICENSE" />
+    <Content Include="Themes\Luna\vendor\moment\meteor\README.md" />
+    <Content Include="Themes\Luna\vendor\moment\Moment.js.nuspec" />
+    <Content Include="Themes\Luna\vendor\moment\README.md" />
+    <Content Include="Themes\Luna\vendor\moment\scripts\npm_prepublish.sh" />
+    <Content Include="Themes\Luna\vendor\sparkline\.bower.json" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\font\summernote.eot" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\font\summernote.ttf" />
+    <Content Include="Themes\Luna\vendor\summernote\dist\font\summernote.woff" />
+    <Content Include="Themes\Luna\vendor\toastr\toastr.js.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Manage\ManageUsers.cshtml" />
+    <Content Include="Views\Manage\EditRole.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\create\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\duration\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\format\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\locale\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\moment\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\parse\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\units\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\lib\utils\" />
+    <Folder Include="Themes\Luna\vendor\moment\src\locale\" />
+    <Folder Include="Themes\Luna\vendor\moment\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Config\Views\web.config" />
+    <Content Include="Areas\Config\Views\Lookup\Index.cshtml" />
+    <Content Include="Areas\Config\Views\Settings\Index.cshtml" />
+    <Content Include="Areas\Inventory\Views\Bins\Index.cshtml" />
+    <Content Include="Areas\Inventory\Views\Assets\Index.cshtml" />
+    <Content Include="Areas\Inventory\Views\Warehouse\Index.cshtml" />
+    <Content Include="Areas\Config\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Inventory\Views\Warehouse\Details.cshtml" />
+    <Content Include="Areas\Inventory\Views\Bins\Details.cshtml" />
+    <Content Include="Areas\Inventory\Views\Assets\Details.cshtml" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Personnel\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\UserProfile.cshtml" />
+    <Content Include="Views\Shared\Luna\_Header.cshtml" />
+    <Content Include="Views\Shared\Luna\_SideBar.cshtml" />
+    <Content Include="Views\Shared\Luna\_Footer.cshtml" />
+    <Content Include="Views\Shared\Luna\_PageHeader.cshtml" />
+    <Content Include="Views\Shared\_Messages.cshtml" />
+    <Content Include="Views\Appointments\Details.cshtml" />
+    <Content Include="Views\Personnel\Details.cshtml" />
+    <Content Include="Views\Personnel\EmailDetails.cshtml" />
+    <Content Include="Views\Personnel\AddressDetails.cshtml" />
+    <Content Include="Views\Personnel\PhoneDetails.cshtml" />
+    <Content Include="Views\Exams\Index.cshtml" />
+    <Content Include="Views\Exams\Details.cshtml" />
+    <Content Include="Views\Personnel\ExamDetails.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51638</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51000/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

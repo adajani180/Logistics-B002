@@ -1,0 +1,129 @@
+﻿@model Logistics.Entities.Personnel.Person
+
+@{
+    ViewBag.Icon = "pe-7s-users";
+    ViewBag.Title = "Person Details";
+    ViewBag.Message = "Add, edit and view Person details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomJs{
+    <script src="@Url.Content("~/Scripts/Personnel/personnel.js")" type="text/javascript"></script>
+}
+
+@using (Html.BeginForm("Details", "Personnel", FormMethod.Post, new { @id = "frmPersonnel" }))
+{
+    @Html.HiddenFor(model => model.Id, new { @id = "PersonId" })
+        
+    <div class="tabs-container">
+        <div class="tabs-left">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-2" aria-expanded="true"> <i class="fa fa-info"></i> Details </a></li>
+                @if (Model != null)
+                {
+                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="true"><i class="fa fa-envelope"></i></a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false"><i class="fa fa-home"></i></a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-5" aria-expanded="false"><i class="fa fa-phone"></i></a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-6" aria-expanded="false"><i class="fa fa-medkit"></i></a></li>
+                }
+            </ul>
+            <div class="tab-content">
+                <div id="tab-2" class="tab-pane active">
+                    <div class="panel-body">
+                        @*<div class="row">*@
+                            @*<div class="col-lg-12">*@
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="FirstName" class="col-sm-2 control-label">First Name</label>
+                                        <div class="col-sm-10">@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", required = "required" })</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="MiddleName" class="col-sm-2 control-label">Middle Name</label>
+                                        <div class="col-sm-10">@Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="LastName" class="col-sm-2 control-label">Last Name</label>
+                                        <div class="col-sm-10">@Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Dob" class="col-sm-2 control-label">D.O.B.</label>
+                                        <div class="col-sm-10">@Html.TextBoxFor(model => model.Dob, new { @class = "form-control" })</div>
+                                    </div>
+                                </div>
+                            @*</div>*@
+                        @*</div>*@
+                    </div>
+                </div>
+                @if (Model != null)
+                {
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <a id="btn-addEmail" class="btn btn-success btn-sm">Add Email</a>
+                                        </div>
+                                        <div class="col-lg-10 text-right"></div>
+                                    </div>
+
+                                    @Html.MVCGrid("PersonnelEmails")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-4" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <a id="btn-addAddress" class="btn btn-success btn-sm">Add Address</a>
+                                        </div>
+                                        <div class="col-lg-10 text-right"></div>
+                                    </div>
+
+                                    @Html.MVCGrid("PersonnelAddresses")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-5" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <a id="btn-addPhone" class="btn btn-success btn-sm">Add Phone</a>
+                                        </div>
+                                        <div class="col-lg-10 text-right"></div>
+                                    </div>
+
+                                    @Html.MVCGrid("PersonnelPhones")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-6" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @Html.MVCGrid("PersonnelExams")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <hr />
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <a id="btn-close" class="btn btn-default" title="Close">Close</a>
+                        <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,105 @@
+﻿@model Logistics.Areas.Inventory.Entities.Bin
+
+@{
+    ViewBag.Icon = "pe-7s-box1";
+    ViewBag.Title = "Bin Details";
+    ViewBag.Message = "Add, edit and view bin details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomJs{
+    @*<script src="@Url.Content("~/Scripts/Inventory/bin.js")" type="text/javascript"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sb-inventory").toggleClass("active");
+            $("#sb-bins").toggleClass("active");
+        });
+
+        $(document).on("click", "#btn-save", function (e) {
+
+            var $form = $("#frmBin");
+            $form.validator();
+            $form.validator("validate");
+
+            var isValid = isFormValid("#frmBin");
+            if (!isValid) {
+                e.preventDefault();
+                return false;
+            }
+
+            $(this).text("Saving...");
+            $(this).attr("disabled", "disabled");
+
+            var bin = {
+                Id: $("#Id").val(),
+                Name: $("#Name").val(),
+                Description: $("#Description").val(),
+                WarehouseId: $("#WarehouseId").val()
+            };
+
+            $.ajax({
+                type: "post",
+                url: "/Inventory/Bins/Save",
+                data: { bin: bin },
+                success: function (result) {
+                    displayMessage(result);
+                },
+                complete: function () {
+                    window.location = "@Url.Action("Index", "Bins", new { Area = "Inventory" })";
+                }
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-filled">
+            <div class="panel-body">
+                <div class="row">
+
+                    @using (Html.BeginForm("Details", "Bins", new { Area = "Inventory" }, FormMethod.Post, new { @id = "frmBin" }))
+                    {
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Description" class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Description, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="WarehouseId" class="col-sm-2 control-label">Warehouse</label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownList("WarehouseId",
+                                            ViewBag.ListOfWarehouses as IEnumerable<SelectListItem>,
+                                            "",
+                                            new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        @Html.ActionLink("Close", "Index", "Bins", new { Area = "Inventory" }, new { @class = "btn btn-default" })
+                                        <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6"></div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

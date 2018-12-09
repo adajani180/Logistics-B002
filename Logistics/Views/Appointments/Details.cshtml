@@ -1,0 +1,134 @@
+﻿@model Logistics.Entities.Appointment.AppointmentSchedule
+
+@{
+    ViewBag.Icon = "pe-7s-date";
+    ViewBag.Title = ViewBag.AppointmentDate;
+    ViewBag.Message = "Manage appointments details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section AddCalendarJs{
+    <script src="@Url.Content("~/Scripts/Appointment/details.js")" type="text/javascript"></script>
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-filled">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="btn-group">
+                            <button type="button" id="btn-close" class="btn btn-default btn-sm active"> Back </button> 
+                            <button type="button" id="btn-add" class="btn btn-default btn-sm active"> Add </button>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.MVCGrid("Appointments")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" id="appointmentModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-filled">
+                            <div class="panel-body">
+                                <div class="form-horizontal" id="frmDetails">
+                                    <input type="hidden" id="Id" value="0" />
+                                    <input type="hidden" id="AppointmentDate" value="" />
+
+                                    <div class="form-group">
+                                        <label for="AppointmentTime" class="col-sm-3 control-label">Time</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="AppointmentTime" name="AppointmentTime" required />
+                                            @*@Html.TextBoxFor(model => model.AppointmentTime, "{0:hh\\:mm}", new { @class = "form-control", required = "required", @placeholder = "Time" })*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Location" class="col-sm-3 control-label">Location</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="Location" name="Location" />
+                                            @*@Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Location" })*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Notes" class="col-sm-3 control-label">Notes</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="Notes" name="Notes" />
+                                            @*@Html.TextBoxFor(model => model.Notes, new { @class = "form-control", @placeholder = "Notes" })*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@using (Html.BeginForm("Details", "Appointments", FormMethod.Post, new { @id = "frmDetails" }))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.AppointmentId)
+    @Html.HiddenFor(model => model.Appointment.AppointmentDate)
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="m-b-sm"><a id="btn-close" class="btn btn-link"><i class="pe pe-7s-angle-left-circle fa-2x"></i></a> @(Model.Appointment.AppointmentDate.ToString("dddd, MMMM d, yyyy"))</h4>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    <div class="col-lg-3 form-inline">
+                        <div class="form-group">
+                            <label for="AppointmentTime">Time</label>
+                            @Html.TextBoxFor(model => model.AppointmentTime, "{0:hh\\:mm}", new { @class = "form-control", required = "required", @placeholder = "Time" })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 form-inline">
+                        <div class="form-group">
+                            <label for="Location">Location</label>
+                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @placeholder = "Location" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4 form-inline">
+                        <div class="form-group">
+                            <label for="Notes">Notes</label>
+                            @Html.TextBoxFor(model => model.Notes, new { @class = "form-control", @placeholder = "Notes" })
+                        </div>
+                    </div>
+                    <div class="col-lg-2 text-right">
+                        <button id="btn-clear" class="btn btn-primary" title="Clear">Clear</button>
+                        <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-filled">
+                <div class="panel-body">
+                    @Html.MVCGrid("AppointmentSchedules")
+                </div>
+            </div>
+        </div>
+    </div>
+}*@

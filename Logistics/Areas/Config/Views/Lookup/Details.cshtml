@@ -1,0 +1,109 @@
+﻿@model Logistics.Areas.Config.Entities.ConfigLookup
+
+@{
+    ViewBag.Icon = "pe-7s-settings";
+    ViewBag.Title = "Lookup Details";
+    ViewBag.Message = "Add, edit and view lookup details.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section CustomJs{
+    @*<script src="@Url.Content("~/Scripts/Config/lookup.js")" type="text/javascript"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sb-config").toggleClass("active");
+            $("#sb-lookup").toggleClass("active");
+        });
+
+        $(document).on("click", "#btn-save", function (e) {
+
+            var $form = $("#frmLookup");
+            $form.validator();
+            $form.validator("validate");
+
+            var isValid = isFormValid("#frmLookup");
+            if (!isValid) {
+                e.preventDefault();
+                return false;
+            }
+
+            $(this).text("Saving...");
+            $(this).attr("disabled", "disabled");
+
+            var lookup = {
+                Id: $("#Id").val(),
+                Name: $("#Name").val(),
+                Description: $("#Description").val(),
+                Code: $("#Code").val(),
+                Type: $("#Type").val()
+            };
+
+            $.ajax({
+                type: "post",
+                url: "/Config/Lookup/Save",
+                data: lookup,
+                success: function (result) {
+                    displayMessage(result);
+                },
+                complete: function () {
+                    window.location = "@Url.Action("Index", "Lookup", new { Area = "Config" })";
+                    //setTimeout(function () {
+                    //    $("#btn-close").trigger("click")
+                    //}, 2000);
+                    //setTimeout(, 3000);
+                }
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-filled">
+            <div class="panel-body">
+                <div class="row">
+
+                    @using (Html.BeginForm("Details", "Lookup", new { Area = "Config" }, FormMethod.Post, new { @id = "frmLookup" }))
+                    {
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="col-lg-6">
+                            <div class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Description, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputCode" class="col-sm-2 control-label">Code</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Code, new { @class = "form-control" })</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputType" class="col-sm-2 control-label">Type</label>
+                                    <div class="col-sm-10">@Html.TextBoxFor(model => model.Type, new { @class = "form-control", required = "required" })</div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        @Html.ActionLink("Close", "Index", "Lookup", new { Area = "Config" }, new { @class = "btn btn-default" })
+                                        <button id="btn-save" class="btn btn-accent" title="Save">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6"></div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

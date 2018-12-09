@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Icon = "pe-7s-date";
+    ViewBag.Title = "Appointments";
+    ViewBag.Message = "Manage appointments.";
+
+    Html.RenderPartial("~/Views/Shared/Luna/_PageHeader.cshtml");
+}
+
+@section AddCalendarCss{
+    @*<link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/plugins/datepicker/css")" rel="stylesheet" type="text/css" />*@
+    <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/calendar/css")" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .fc-left h2 { font-size: 24px; }
+        .fc-day-header { font: normal 14px 'Roboto', sans-serif; }
+        .fc-day-number { font: normal 12px 'Roboto', sans-serif; }
+        th.fc-widget-header { text-align: right; }
+        thead.fc-head {}
+        #calendar .fc-today { background-color: transparent; }
+    </style>
+}
+
+@section AddCalendarJs{
+    @*<script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/plugins/datepicker/js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Appointment/appointment.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/bundles/calendar/js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Appointment/appointment-cal.js")" type="text/javascript"></script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-filled hidden-xs">
+            <div class="panel-body">
+                @*<div class="col-md-3 col-xs-12 text-center">
+                    <button type="button" class="btn btn-accent btn-block active">Create Appointment</button>
+                </div>*@
+                <div class="col-md-4 col-xs-12 text-center">
+                    <h2 class="no-margins" id="totalAppointments"></h2>
+                    <span class="c-accent">Available</span> Appointment(s)
+                </div>
+                <div class="col-md-4 col-xs-12 text-center">
+                    <h2 class="no-margins" id="totalScheduled"></h2>
+                    <span class="c-text">Scheduled</span> Appointment(s)
+                </div>
+                <div class="col-md-4 col-xs-12 text-center">
+                    <h2 class="no-margins" id="totalConfirmed"></h2>
+                    <span class="c-white">Confirmed</span> Appointment(s)
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-filled">
+            <div class="panel-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-lg-2">
+        
+    </div>
+    <div class="col-lg-10">
+        
+    </div>
+</div>*@
+
+<div class="modal fade in" id="scheduleModal" role="dialog">
+    <input type="hidden" id="appId" value="0" />
+    <input type="hidden" id="schedId" value="0" />
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table m-t-sm">
+                            <tbody>
+                                <tr>
+                                    <td>Date</td>
+                                    <td class="text-right"><strong class="c-white" id="schedDate"></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Time</td>
+                                    <td class="text-right"><strong class="c-white" id="schedTime"></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td class="text-right"><strong class="c-white" id="schedLocation"></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td class="text-right"><strong class="c-white" id="schedNotes"></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table m-t-sm">
+                            <tbody>
+                                <tr id="trPerson">
+                                    <td>Person</td>
+                                    <td class="text-right"><strong class="c-white" id="schedPerson"></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Exam</td>
+                                    <td class="text-right">@Html.DropDownList("Exam", (IEnumerable<SelectListItem>)ViewBag.ListOfExams, string.Empty, new { @class = "form-control input-sm" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>
+
+                <div id="divPersonnonel">
+                    <div class="row">
+                        <div class="panel panel-filled">
+                            <div class="panel-body">
+                                <div class="text-right">
+                                    <div class="dataTables_length dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-sm" data-mvcgrid-type="filter" data-mvcgrid-option="FullName" placeholder="Search">
+                                        </div>
+                                        <button type="button" class="btn btn-accent btn-sm" data-mvcgrid-apply-filter="click">Apply</button>
+                                    </div>
+                                </div>
+
+                                <br />
+                                @Html.MVCGrid("AppointmentPersonnel")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btn-confirm" class="btn btn-success active">Confirm</button>
+                <button type="button" id="btn-cancel" class="btn btn-danger active">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

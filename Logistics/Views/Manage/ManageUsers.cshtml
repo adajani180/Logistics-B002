@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Logistics.Models.ManageUsersViewModel>
+@{
+    ViewBag.Title = "Manage Users";
+}
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+<h4>Edit users and roles</h4>
+
+<div class="row pt-20">
+    <div class="col-lg-12">
+        <table class="table">
+            <tr>
+                <th>
+                    Username
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Edit
+                </th>
+            </tr>
+
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.Role
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditRole", "Manage", new { id = user.Email + "/" }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
