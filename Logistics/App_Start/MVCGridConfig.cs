@@ -48,6 +48,8 @@ namespace Logistics
             MVCGridDefinitionTable.Add("PersonnelAddresses", BuildPersonnelAddressesGrid(gridDefaults));
             MVCGridDefinitionTable.Add("PersonnelPhones", BuildPersonnelPhonesGrid(gridDefaults));
 
+            MVCGridDefinitionTable.Add("Locations", BuildLocationsGrid(gridDefaults));
+
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
@@ -770,6 +772,68 @@ namespace Logistics
                     //    phones = phones.Skip(options.GetLimitOffset().Value).Take(options.GetLimitRowcount().Value);
 
                     results.Items = phones.ToList<Phone>();
+
+                    return results;
+                });
+        }
+
+        #endregion
+
+        #region Locations
+
+        private static MVCGridBuilder<Location> BuildLocationsGrid(GridDefaults gridDefaults)
+        {
+            return new MVCGridBuilder<Location>(gridDefaults)
+                .WithAuthorizationType(AuthorizationType.AllowAnonymous)
+                .AddColumns(cols =>
+                {
+                    cols.Add("Name")
+                        .WithHeaderText("Name")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(loc => loc.Name);
+                    cols.Add("Actions")
+                        .WithHtmlEncoding(false)
+                        .WithCellCssClassExpression(col => cellCssClassExpression)
+                        .WithValueExpression(per => per.Id.ToString())
+                        .WithValueTemplate("<a href='/Locations/Details/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
+                            jqueryDeleteButton);
+                })
+                .WithSorting(sorting: true, defaultSortColumn: "Name", defaultSortDirection: SortDirection.Asc)
+                .WithPaging(true, gridDefaults.ItemsPerPage)
+                .WithFiltering(true)
+                .WithRetrieveDataMethod((context) =>
+                {
+                    var options = context.QueryOptions;
+                    string search = options.GetFilterString("Name");
+
+                    LocationRepository locRepo = new LocationRepository();
+                    IEnumerable<Location> locations = null;
+                    if (!string.IsNullOrEmpty(search))
+                        locations = locRepo.Find(loc => loc.Name.Contains(search));
+                    else
+                        locations = locRepo.GetAll();
+
+                    QueryResult<Location> results = new QueryResult<Location>()
+                    {
+                        TotalRecords = locations.Count()
+                    };
+
+                    // sorting
+                    switch (options.SortColumnName)
+                    {
+                        case "Name":
+                            locations = options.SortDirection == SortDirection.Dsc ?
+                                locations.OrderByDescending(loc => loc.Name) : locations.OrderBy(loc => loc.Name);
+                            break;
+                    }
+
+                    // paging
+                    locations = Paginate<Location>(locations, options);
+                    //if (options.GetLimitOffset().HasValue)
+                    //    personnel = personnel.Skip(options.GetLimitOffset().Value).Take(options.GetLimitRowcount().Value);
+
+                    results.Items = locations.ToList<Location>();
 
                     return results;
                 });

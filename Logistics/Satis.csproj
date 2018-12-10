@@ -115,6 +115,9 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -124,8 +127,11 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -199,6 +205,7 @@
     <Compile Include="Areas\Inventory\Repositories\WarehouseRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -212,12 +219,14 @@
     <Compile Include="Entities\Error\ErrorLog.cs" />
     <Compile Include="Entities\Exam\Exam.cs" />
     <Compile Include="Entities\Exam\ExamResult.cs" />
+    <Compile Include="Entities\Location\Location.cs" />
     <Compile Include="Entities\Personnel\Person.cs" />
     <Compile Include="Exceptions\SessionExpiredException.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Helpers\ErrorLogHelper.cs" />
+    <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
     <Compile Include="Helpers\MiscHelper.cs" />
+    <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ErrorLogContext.cs" />
@@ -233,6 +242,7 @@
     <Compile Include="Models\AppointmentContext.cs" />
     <Compile Include="Areas\Config\Models\ConfigLookupContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LocationContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PersonnelContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,6 +254,7 @@
     <Compile Include="Repositories\Exam\ExamResultRepository.cs" />
     <Compile Include="Repositories\Exam\ExamRepository.cs" />
     <Compile Include="Repositories\Interface\IRepository.cs" />
+    <Compile Include="Repositories\Location\LocationRepository.cs" />
     <Compile Include="Repositories\Personnel\PhoneRepository.cs" />
     <Compile Include="Repositories\Personnel\EmailRepository.cs" />
     <Compile Include="Repositories\Personnel\AddressRepository.cs" />
@@ -263,34 +274,8 @@
     <Content Include="Plugins\datepicker\css\bootstrap-datepicker3.min.css" />
     <Content Include="Plugins\datepicker\js\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\Appointment\appointment-cal.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\Exam\exam.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Location\locations.js" />
     <Content Include="Scripts\Personnel\exam.js" />
     <Content Include="Scripts\Personnel\phone.js" />
     <Content Include="Scripts\Personnel\address.js" />
@@ -298,14 +283,6 @@
     <Content Include="Scripts\Personnel\personnel.js" />
     <Content Include="Scripts\Appointment\details.js" />
     <Content Include="Scripts\Appointment\appointment.js" />
-    <Content Include="Scripts\popper-utils.js" />
-    <Content Include="Scripts\popper-utils.min.js" />
-    <Content Include="Scripts\popper.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\satis.js" />
     <Content Include="Plugins\calendar\css\fullcalendar.css" />
     <Content Include="Plugins\calendar\css\fullcalendar.min.css" />
@@ -315,10 +292,6 @@
     <Content Include="Plugins\calendar\js\gcal.js" />
     <Content Include="Plugins\calendar\js\lang-all.js" />
     <Content Include="Plugins\validator\validator.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Themes\Luna\scripts\luna.js" />
     <Content Include="Themes\Luna\styles\pe-icons\helper.css" />
     <Content Include="Themes\Luna\styles\pe-icons\pe-icon-7-stroke.css" />
@@ -1455,17 +1428,10 @@
     <Content Include="Themes\Luna\vendor\summernote\dist\font\summernote.ttf" />
     <Content Include="Themes\Luna\vendor\summernote\dist\font\summernote.woff" />
     <Content Include="Themes\Luna\vendor\toastr\toastr.js.map" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Manage\ManageUsers.cshtml" />
     <Content Include="Views\Manage\EditRole.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\Luna\vendor\moment\src\lib\create\" />
@@ -1491,6 +1457,7 @@
     <Content Include="Areas\Inventory\Views\Bins\Details.cshtml" />
     <Content Include="Areas\Inventory\Views\Assets\Details.cshtml" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Content Include="NLog.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -1519,15 +1486,10 @@
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,11 +1,14 @@
 ﻿using Logistics.Entities.Error;
 using Logistics.Repositories;
+using NLog;
 using System;
 
 namespace Logistics.Helpers
 {
-    public class ErrorLogHelper
+    public class LogHelper
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         public static void Save(Exception exc, string userName)
         {
             if (exc == null) return;
@@ -20,6 +23,10 @@ namespace Logistics.Helpers
 
             ErrorLogRepository repo = new ErrorLogRepository();
             repo.Save(error);
+
+            Log(LogLevel.Error, error.Message);
         }
+
+        public static void Log(LogLevel level, string msg) => logger.Log(level, msg);
     }
 }

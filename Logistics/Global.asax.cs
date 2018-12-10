@@ -1,4 +1,5 @@
 ﻿using Logistics.Helpers;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Configuration;
 using System.Web.Mvc;
@@ -22,18 +23,6 @@ namespace Logistics
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            //string userName = this.User.Identity.Name;
-            //userName = userName.Substring(userName.IndexOf("\\") + 1);
-
-            //if (userName == null)
-            //{
-            //}
-            //else
-            //{
-            //    AccessRepository accessRepo = new AccessRepository();
-            //    SystemUser user = accessRepo.Get(userName);
-            //    Session.Add(Enum.GetName(typeof(SessionEnum), SessionEnum.UserInSession), user);
-            //}
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -42,8 +31,9 @@ namespace Logistics
 
             try
             {
-                string userName = SessionHelper.SatisUser == null ? "System" : SessionHelper.SatisUser.UserName;
-                ErrorLogHelper.Save(exc, userName);
+                //string userName = SessionHelper.SatisUser == null ? "System" : SessionHelper.SatisUser.UserName;
+                string userName = User.Identity == null ? "System" : User.Identity.GetUserName();
+                LogHelper.Save(exc, userName);
             }
             finally { }
 
