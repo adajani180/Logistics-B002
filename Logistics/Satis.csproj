@@ -203,6 +203,10 @@
     <Compile Include="Areas\Inventory\Repositories\AssetRepository.cs" />
     <Compile Include="Areas\Inventory\Repositories\BinRepository.cs" />
     <Compile Include="Areas\Inventory\Repositories\WarehouseRepository.cs" />
+    <Compile Include="Areas\Transactions\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Transactions\Entities\Transaction.cs" />
+    <Compile Include="Areas\Transactions\Models\TransactionsContext.cs" />
+    <Compile Include="Areas\Transactions\TransactionsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -1458,6 +1462,9 @@
     <Content Include="Areas\Inventory\Views\Assets\Details.cshtml" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Content Include="NLog.config" />
+    <Content Include="Areas\Transactions\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Transactions\Views\web.config" />
+    <Content Include="Areas\Transactions\Views\_ViewStart.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
