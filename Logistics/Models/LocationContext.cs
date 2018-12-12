@@ -12,6 +12,10 @@ namespace Logistics.Models
 
         public virtual DbSet<Location> Locations { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
