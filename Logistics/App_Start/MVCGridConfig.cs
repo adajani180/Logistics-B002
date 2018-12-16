@@ -11,6 +11,7 @@ namespace Logistics
     using Logistics.Entities.Appointment;
     using Logistics.Entities.Contact;
     using Logistics.Entities.Personnel;
+    using Logistics.Entities.Identity;
     using Logistics.Repositories;
     using MVCGrid.Models;
     using MVCGrid.Web;
@@ -18,6 +19,7 @@ namespace Logistics
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using Logistics.Repositories.Identity;
 
     public static class MVCGridConfig 
     {
@@ -49,6 +51,8 @@ namespace Logistics
             MVCGridDefinitionTable.Add("PersonnelPhones", BuildPersonnelPhonesGrid(gridDefaults));
 
             MVCGridDefinitionTable.Add("Locations", BuildLocationsGrid(gridDefaults));
+
+            //MVCGridDefinitionTable.Add("ManageUsers",)
 
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
@@ -914,5 +918,78 @@ namespace Logistics
         }
 
         #endregion
+
+        #region ManageUsers
+
+        private static MVCGridBuilder<Identity> BuildManageUsersGrid(GridDefaults gridDefaults)
+        {
+            return new MVCGridBuilder<Identity>(gridDefaults)
+                .WithAuthorizationType(AuthorizationType.AllowAnonymous)
+                .AddColumns(cols =>
+                {
+                    cols.Add("Username")
+                        .WithHeaderText("Username")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(user => user.Username);
+                    cols.Add("Email")
+                        .WithHeaderText("Email")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(user => user.Email);
+                    cols.Add("Role")
+                        .WithHeaderText("Role")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(user => user.Role);
+                    cols.Add("Actions")
+                        .WithHtmlEncoding(false)
+                        .WithCellCssClassExpression(col => cellCssClassExpression)
+                        .WithValueExpression(per => per.Id.ToString())
+                        .WithValueTemplate("<a href='/Manage/EditRole/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
+                            jqueryDeleteButton);
+                })
+                .WithSorting(sorting: true, defaultSortColumn: "Username", defaultSortDirection: SortDirection.Asc)
+                .WithPaging(true, gridDefaults.ItemsPerPage)
+                .WithFiltering(true)
+                .WithRetrieveDataMethod((context) =>
+                {
+                    var options = context.QueryOptions;
+                    string search = options.GetFilterString("Username");
+
+                    IdentityRepository IRepo = new IdentityRepository();
+                    IEnumerable<Identity> Identity = null;
+                    if (!string.IsNullOrEmpty(search))
+                        Identity = IRepo.Find(user => user.UserName.Contains(search));
+                    else
+                        Identity = IRepo.GetAll();
+
+                    QueryResult<Identity> results = new QueryResult<Identity>()
+                    {
+                        TotalRecords = Identity.Count()
+                    };
+
+                    // sorting
+                    switch (options.SortColumnName)
+                    {
+                        case "Username":
+                            Identity = options.SortDirection == SortDirection.Dsc ?
+                                Identity.OrderByDescending(user => user.Username) : Identity.OrderBy(user => user.Username);
+                            break;
+                    }
+
+                    // paging
+                    Identity = Paginate<Identity>(Identity, options);
+                    //if (options.GetLimitOffset().HasValue)
+                    //    personnel = personnel.Skip(options.GetLimitOffset().Value).Take(options.GetLimitRowcount().Value);
+
+                    results.Items = Identity.ToList<Identity>();
+
+                    return results;
+                });
+        }
+
+        #endregion
+
     }
 }
