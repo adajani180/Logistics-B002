@@ -253,6 +253,7 @@
     <Compile Include="Areas\Config\Repositories\LookupRepository.cs" />
     <Compile Include="Repositories\Exam\ExamResultRepository.cs" />
     <Compile Include="Repositories\Exam\ExamRepository.cs" />
+    <Compile Include="Repositories\Identity\IdentityRespository.cs" />
     <Compile Include="Repositories\Interface\IRepository.cs" />
     <Compile Include="Repositories\Location\LocationRepository.cs" />
     <Compile Include="Repositories\Personnel\PhoneRepository.cs" />
