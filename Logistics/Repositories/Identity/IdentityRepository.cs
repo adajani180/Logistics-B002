@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Logistics.Repositories.Interface;
+using Logistics.Entities;
 using Logistics.Models;
+using Logistics.Repositories.Interface;
+using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace Logistics.Repositories.Identity
 {
-    public class IdentityRepository : IRepository<ApplicationUser>
+    public class IdentityRepository : IRepository<Entities.Identity>
     {
-        public void Delete(ApplicationUser entity)
+        public void Delete(Entities.Identity entity)
         {
             throw new NotImplementedException();
         }
@@ -20,22 +21,22 @@ namespace Logistics.Repositories.Identity
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ApplicationUser> Find(Expression<Func<ApplicationUser, bool>> predicate)
+        public IEnumerable<Entities.Identity> Find(Expression<Func<Entities.Identity, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public ApplicationUser Get(object id)
+        public Entities.Identity Get(object id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ApplicationUser> GetAll()
+        public IEnumerable<Entities.Identity> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Save(ApplicationUser entity)
+        public void Save(Entities.Identity entity)
         {
             throw new NotImplementedException();
         }

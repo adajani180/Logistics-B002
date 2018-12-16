@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Logistics.Models.ManageUsersViewModel>
+
+@using MVCGrid.Web
+
 @{
     ViewBag.Title = "Manage Users";
 }
@@ -38,5 +41,22 @@
                 </tr>
             }
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="panelLocations" class="panel panel-filled">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <a id="btn-add" class="btn btn-success btn-sm active">Add</a>
+                    </div>
+                    <div class="col-lg-10 text-right"></div>
+                </div>
+
+                @Html.MVCGrid("ManageUsers")
+            </div>
+        </div>
     </div>
 </div>

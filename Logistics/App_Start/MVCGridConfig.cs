@@ -11,7 +11,6 @@ namespace Logistics
     using Logistics.Entities.Appointment;
     using Logistics.Entities.Contact;
     using Logistics.Entities.Personnel;
-    using Logistics.Entities.Identity;
     using Logistics.Repositories;
     using MVCGrid.Models;
     using MVCGrid.Web;
