@@ -52,7 +52,7 @@ namespace Logistics
 
             MVCGridDefinitionTable.Add("Locations", BuildLocationsGrid(gridDefaults));
 
-            //MVCGridDefinitionTable.Add("ManageUsers",)
+            MVCGridDefinitionTable.Add("ManageUsers", BuildManageUsersGrid(gridDefaults));
 
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
@@ -960,7 +960,7 @@ namespace Logistics
                     IdentityRepository IRepo = new IdentityRepository();
                     IEnumerable<Identity> Identity = null;
                     if (!string.IsNullOrEmpty(search))
-                        Identity = IRepo.Find(user => user.UserName.Contains(search));
+                        Identity = IRepo.Find(user => user.Username.Contains(search));
                     else
                         Identity = IRepo.GetAll();
 
