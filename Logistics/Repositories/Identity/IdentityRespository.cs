@@ -4,17 +4,13 @@ using System.Linq;
 using System.Web;
 using Logistics.Repositories.Interface;
 using Logistics.Models;
+using System.Linq.Expressions;
 
 namespace Logistics.Repositories.Identity
 {
-    public class IdentityRespository : IRepository<Identity>       
+    public class IdentityRepository : IRepository<ApplicationUser>
     {
-
-        ApplicationDbContext context = new ApplicationDbContext();
-
-
-
-        public void Delete(Identity entity)
+        public void Delete(ApplicationUser entity)
         {
             throw new NotImplementedException();
         }
@@ -24,22 +20,22 @@ namespace Logistics.Repositories.Identity
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Identity> Find(System.Linq.Expressions.Expression<Func<Identity, bool>> predicate)
+        public IEnumerable<ApplicationUser> Find(Expression<Func<ApplicationUser, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Identity Get(object id)
+        public ApplicationUser Get(object id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Identity> GetAll()
+        public IEnumerable<ApplicationUser> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Save(Identity entity)
+        public void Save(ApplicationUser entity)
         {
             throw new NotImplementedException();
         }
