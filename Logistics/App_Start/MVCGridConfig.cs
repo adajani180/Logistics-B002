@@ -19,6 +19,7 @@ namespace Logistics
     using System.Linq;
     using System.Linq.Expressions;
     using Logistics.Repositories.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public static class MVCGridConfig 
     {
@@ -920,9 +921,9 @@ namespace Logistics
 
         #region ManageUsers
 
-        private static MVCGridBuilder<Identity> BuildManageUsersGrid(GridDefaults gridDefaults)
+        private static MVCGridBuilder<IdentityUser> BuildManageUsersGrid(GridDefaults gridDefaults)
         {
-            return new MVCGridBuilder<Identity>(gridDefaults)
+            return new MVCGridBuilder<IdentityUser>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
                 {
@@ -930,17 +931,17 @@ namespace Logistics
                         .WithHeaderText("Username")
                         .WithSorting(true)
                         .WithFiltering(true)
-                        .WithValueExpression(user => user.Username);
+                        .WithValueExpression(user => user.UserName);
                     cols.Add("Email")
                         .WithHeaderText("Email")
                         .WithSorting(true)
                         .WithFiltering(true)
                         .WithValueExpression(user => user.Email);
-                    cols.Add("Role")
-                        .WithHeaderText("Role")
-                        .WithSorting(true)
-                        .WithFiltering(true)
-                        .WithValueExpression(user => user.Role);
+                    //cols.Add("Role")
+                    //    .WithHeaderText("Role")
+                    //    .WithSorting(true)
+                    //    .WithFiltering(true)
+                    //    .WithValueExpression(user => user.Role);
                     cols.Add("Actions")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(col => cellCssClassExpression)
@@ -957,13 +958,13 @@ namespace Logistics
                     string search = options.GetFilterString("Username");
 
                     IdentityRepository IRepo = new IdentityRepository();
-                    IEnumerable<Identity> Identity = null;
+                    IEnumerable<IdentityUser> Identity = null;
                     if (!string.IsNullOrEmpty(search))
-                        Identity = IRepo.Find(user => user.Username.Contains(search));
+                        Identity = IRepo.Find(user => user.UserName.Contains(search));
                     else
                         Identity = IRepo.GetAll();
 
-                    QueryResult<Identity> results = new QueryResult<Identity>()
+                    QueryResult<IdentityUser> results = new QueryResult<IdentityUser>()
                     {
                         TotalRecords = Identity.Count()
                     };
@@ -973,16 +974,16 @@ namespace Logistics
                     {
                         case "Username":
                             Identity = options.SortDirection == SortDirection.Dsc ?
-                                Identity.OrderByDescending(user => user.Username) : Identity.OrderBy(user => user.Username);
+                                Identity.OrderByDescending(user => user.UserName) : Identity.OrderBy(user => user.UserName);
                             break;
                     }
 
                     // paging
-                    Identity = Paginate<Identity>(Identity, options);
+                    Identity = Paginate<IdentityUser>(Identity, options);
                     //if (options.GetLimitOffset().HasValue)
                     //    personnel = personnel.Skip(options.GetLimitOffset().Value).Take(options.GetLimitRowcount().Value);
 
-                    results.Items = Identity.ToList<Identity>();
+                    results.Items = Identity.ToList<IdentityUser>();
 
                     return results;
                 });

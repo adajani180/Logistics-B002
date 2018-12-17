@@ -6,39 +6,60 @@ using Logistics.Models;
 using Logistics.Repositories.Interface;
 using System.Data.Entity;
 using System.Linq.Expressions;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Logistics.Repositories.Identity
 {
-    public class IdentityRepository : IRepository<Entities.Identity>
+    public class IdentityRepository : IRepository<IdentityUser>
     {
-        public void Delete(Entities.Identity entity)
-        {
-            throw new NotImplementedException();
-        }
+        // DB Context
+        ApplicationDbContext context = new ApplicationDbContext();
 
         public void Delete(object id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Entities.Identity> Find(Expression<Func<Entities.Identity, bool>> predicate)
+        public void Delete(IdentityUser entity)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Identity Get(object id)
+        public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Entities.Identity> GetAll()
+        public IEnumerable<IdentityUser> GetAll()
+        {
+            UserManager _userManager = new UserManager();
+            return _userManager.Users.ToList();
+        }
+
+        public void Save(IdentityUser entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Save(Entities.Identity entity)
+        IdentityUser IRepository<IdentityUser>.Get(object id)
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class UserManager : UserManager<ApplicationUser>
+    {
+        public UserManager()
+            : base(new UserStore<ApplicationUser>(new ApplicationDbContext()))
+        { }
+    }
+
+    public class RoleManager : RoleManager<IdentityRole>
+    {
+        public RoleManager()
+            : base(new RoleStore<IdentityRole>(new ApplicationDbContext()))
+        { }
     }
 }
