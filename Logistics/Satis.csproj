@@ -219,7 +219,6 @@
     <Compile Include="Entities\Error\ErrorLog.cs" />
     <Compile Include="Entities\Exam\Exam.cs" />
     <Compile Include="Entities\Exam\ExamResult.cs" />
-    <Compile Include="Entities\Identity\Identity.cs" />
     <Compile Include="Entities\Location\Location.cs" />
     <Compile Include="Entities\Personnel\Person.cs" />
     <Compile Include="Exceptions\SessionExpiredException.cs" />

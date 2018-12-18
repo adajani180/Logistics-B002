@@ -89,6 +89,7 @@ namespace Logistics.Repositories.Identity
         }
     }
 
+    // UserManager deals with context calls for ApplicationUsers. Built into Identity Framework by default. 
     public class UserManager : UserManager<ApplicationUser>
     {
         public UserManager()
