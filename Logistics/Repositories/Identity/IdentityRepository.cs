@@ -18,32 +18,20 @@ namespace Logistics.Repositories.Identity
         // DB Context
         ApplicationDbContext context = new ApplicationDbContext();
 
-        public void Delete(IdentityUser entity)
+        public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate) => this.context.Users.AsNoTracking().Where(predicate);
+
+        public IdentityRole GetRole(object id)
         {
-            UserManager _userManager = new UserManager();
-
-            string userId = this.Get(entity.Id).ToString();        
-            ApplicationUser user = _userManager.FindById(userId);
-
-            if (this.context.Entry(entity).State == EntityState.Detached)
-                this.context.Set<IdentityUser>().Attach(entity);
-
-            this.context.Users.Remove(user);
-            this.context.SaveChanges();
-        }
-
-        public void Delete(object id)
-        {
+            RoleManager _roleManager = new RoleManager();
             UserManager _userManager = new UserManager();
 
             string userId = id.ToString();
             ApplicationUser user = _userManager.FindById(userId);
 
-            this.Delete(user);
+            IdentityRole userRole = _roleManager.FindById(user.Id);
+
+            return userRole;
         }
-
-        public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate) => this.context.Users.AsNoTracking().Where(predicate);
-
 
         public IdentityUser Get(object id)
         {
@@ -87,6 +75,30 @@ namespace Logistics.Repositories.Identity
 
             this.context.SaveChanges();
         }
+
+        public void Delete(IdentityUser entity)
+        {
+            UserManager _userManager = new UserManager();
+
+            string userId = this.Get(entity.Id).ToString();
+            ApplicationUser user = _userManager.FindById(userId);
+
+            if (this.context.Entry(entity).State == EntityState.Detached)
+                this.context.Set<IdentityUser>().Attach(entity);
+
+            this.context.Users.Remove(user);
+            this.context.SaveChanges();
+        }
+
+        public void Delete(object id)
+        {
+            UserManager _userManager = new UserManager();
+
+            string userId = id.ToString();
+            ApplicationUser user = _userManager.FindById(userId);
+
+            this.Delete(user);
+        }
     }
 
     // UserManager deals with context calls for ApplicationUsers. Built into Identity Framework by default. 
@@ -94,6 +106,13 @@ namespace Logistics.Repositories.Identity
     {
         public UserManager()
             : base(new UserStore<ApplicationUser>(new ApplicationDbContext()))
+        { }
+    }
+
+    public class RoleManager : RoleManager<IdentityRole>
+    {
+        public RoleManager()
+            : base(new RoleStore<IdentityRole>(new ApplicationDbContext()))
         { }
     }
 }
