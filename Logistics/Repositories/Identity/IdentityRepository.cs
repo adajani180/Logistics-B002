@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections;
 
 namespace Logistics.Repositories.Identity
 {
@@ -27,9 +28,17 @@ namespace Logistics.Repositories.Identity
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate)
+        public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate) => this.context.Users.AsNoTracking().Where(predicate);
+
+
+        public IdentityUser Get(object id)
         {
-            throw new NotImplementedException();
+            UserManager _userManager = new UserManager();
+
+            string userId = id.ToString();
+            var user = _userManager.FindById(userId);
+
+            return user;
         }
 
         public IEnumerable<IdentityUser> GetAll()
@@ -40,12 +49,29 @@ namespace Logistics.Repositories.Identity
 
         public void Save(IdentityUser entity)
         {
-            throw new NotImplementedException();
-        }
+            UserManager _userManager = new UserManager();
 
-        IdentityUser IRepository<IdentityUser>.Get(object id)
-        {
-            throw new NotImplementedException();
+            string userId = this.Get(entity.Id).ToString();
+
+            ApplicationUser user = _userManager.FindById(userId);
+            
+            if (user == null)
+            {
+                //entity.Id = entity.Id;
+                //entity.UserName = entity.UserName;
+                //entity.Email = entity.Email;
+                this.context.Users.Add(user);
+            }
+            else
+            {
+                //entity.Id = entity.Id;
+                //entity.UserName = entity.UserName;
+                //entity.Email = entity.Email;
+                this.context.Entry(user)
+                    .State = EntityState.Modified;
+            }
+
+            this.context.SaveChanges();
         }
     }
 
