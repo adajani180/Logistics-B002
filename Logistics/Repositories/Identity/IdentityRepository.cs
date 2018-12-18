@@ -18,14 +18,28 @@ namespace Logistics.Repositories.Identity
         // DB Context
         ApplicationDbContext context = new ApplicationDbContext();
 
-        public void Delete(object id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(IdentityUser entity)
         {
-            throw new NotImplementedException();
+            UserManager _userManager = new UserManager();
+
+            string userId = this.Get(entity.Id).ToString();        
+            ApplicationUser user = _userManager.FindById(userId);
+
+            if (this.context.Entry(entity).State == EntityState.Detached)
+                this.context.Set<IdentityUser>().Attach(entity);
+
+            this.context.Users.Remove(user);
+            this.context.SaveChanges();
+        }
+
+        public void Delete(object id)
+        {
+            UserManager _userManager = new UserManager();
+
+            string userId = id.ToString();
+            ApplicationUser user = _userManager.FindById(userId);
+
+            this.Delete(user);
         }
 
         public IEnumerable<IdentityUser> Find(Expression<Func<IdentityUser, bool>> predicate) => this.context.Users.AsNoTracking().Where(predicate);
@@ -36,7 +50,7 @@ namespace Logistics.Repositories.Identity
             UserManager _userManager = new UserManager();
 
             string userId = id.ToString();
-            var user = _userManager.FindById(userId);
+            ApplicationUser user = _userManager.FindById(userId);
 
             return user;
         }
@@ -79,13 +93,6 @@ namespace Logistics.Repositories.Identity
     {
         public UserManager()
             : base(new UserStore<ApplicationUser>(new ApplicationDbContext()))
-        { }
-    }
-
-    public class RoleManager : RoleManager<IdentityRole>
-    {
-        public RoleManager()
-            : base(new RoleStore<IdentityRole>(new ApplicationDbContext()))
         { }
     }
 }
