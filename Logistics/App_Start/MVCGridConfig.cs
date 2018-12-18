@@ -937,11 +937,11 @@ namespace Logistics
                         .WithSorting(true)
                         .WithFiltering(true)
                         .WithValueExpression(user => user.Email);
-                    //cols.Add("Role")
-                    //    .WithHeaderText("Role")
-                    //    .WithSorting(true)
-                    //    .WithFiltering(true)
-                    //    .WithValueExpression(user => user.Role);
+                    cols.Add("Role")
+                        .WithHeaderText("Role")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(user => user.Roles.ToString());
                     cols.Add("Actions")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(col => cellCssClassExpression)
@@ -960,7 +960,7 @@ namespace Logistics
                     IdentityRepository IRepo = new IdentityRepository();
                     IEnumerable<IdentityUser> Identity = null;
                     if (!string.IsNullOrEmpty(search))
-                        Identity = IRepo.Find(user => user.UserName.Contains(search));
+                        Identity = IRepo.Find(user => user.Id.Contains(search));
                     else
                         Identity = IRepo.GetAll();
 
@@ -980,8 +980,6 @@ namespace Logistics
 
                     // paging
                     Identity = Paginate<IdentityUser>(Identity, options);
-                    //if (options.GetLimitOffset().HasValue)
-                    //    personnel = personnel.Skip(options.GetLimitOffset().Value).Take(options.GetLimitRowcount().Value);
 
                     results.Items = Identity.ToList<IdentityUser>();
 
