@@ -10,6 +10,7 @@ using Logistics.Models;
 using Logistics.App_Start;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using Logistics.Repositories.Identity;
 
 namespace Logistics.Controllers
 {
@@ -18,9 +19,13 @@ namespace Logistics.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private RoleManager _roleManager;
+        private IdentityRepository _identityRepo;
 
         public ManageController()
         {
+            this._identityRepo = new IdentityRepository();
+            this._roleManager = new RoleManager();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -52,6 +57,8 @@ namespace Logistics.Controllers
                 _userManager = value;
             }
         }
+
+        #region Stock Code from Identity
 
         //
         // GET: /Manage/Index
@@ -338,48 +345,55 @@ namespace Logistics.Controllers
 
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region Manage Users - by Ricky
 
         // GET: /Manage/ManageUsers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageUsers()
         {
-            var context = new ApplicationDbContext();
+            //var context = new ApplicationDbContext();
 
-            var usersWithRoles = (from user in context.Users
-                                  select new
-                                  {
-                                      UserId = user.Id,
-                                      Username = user.UserName,
-                                      Email = user.Email,
-                                      RoleNames = (from userRole in user.Roles
-                                                   join role in context.Roles on userRole.RoleId
-                                                   equals role.Id
-                                                   select role.Name).ToList()
-                                  }).ToList().Select(p => new ManageUsersViewModel
-                                  {
-                                      Email = p.Email,
-                                      Role = string.Join(",", p.RoleNames)
-                                  });
+            //var usersWithRoles = (from user in context.Users
+            //                      select new
+            //                      {
+            //                          UserId = user.Id,
+            //                          Username = user.UserName,
+            //                          Email = user.Email,
+            //                          RoleNames = (from userRole in user.Roles
+            //                                       join role in context.Roles on userRole.RoleId
+            //                                       equals role.Id
+            //                                       select role.Name).ToList()
+            //                      }).ToList().Select(p => new ManageUsersViewModel
+            //                      {
+            //                          Email = p.Email,
+            //                          Role = string.Join(",", p.RoleNames)
+            //                      });
 
-            return View(usersWithRoles);
+            //return View(usersWithRoles);
+
+            //var modal = _identityRepo.GetAll();
+
+            return View();
+
         }
 
         // GET: /Manage/EditRole/<user>
         [Authorize(Roles = "Admin")]
         public ActionResult EditRole(string id)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            var user = UserManager.FindByEmail(id);
-            var rolesForUser = user.Roles.ToList();
-            var roleid = rolesForUser[0].RoleId;
-            var role = roleManager.FindById(roleid);
-            string userRole = role.Name;
-
             List<SelectListItem> allRolesList = new List<SelectListItem>();
-            foreach (var item in context.Roles)
+
+            var user = UserManager.FindById(id);
+
+            var rolesForUser = user.Roles.ToList();
+            var roleId = rolesForUser[0].RoleId;
+            var listOfRoles = _identityRepo.GetAllRoles();
+
+            IdentityRole role = _identityRepo.GetRole(roleId);
+
+            foreach (var item in listOfRoles)
             {
                 allRolesList.Add(new SelectListItem()
                 {
@@ -387,15 +401,16 @@ namespace Logistics.Controllers
                     Value = item.Id
                 });
             }
-
-            var model = new EditUserRole
+           
+            var modal = new EditUserRole
             {
                 Email = user.Email,
-                UserRole = userRole,
-                RoleList = allRolesList
+                UserRole = _identityRepo.GetRole(roleId).Name.ToString(),
+                RoleList = allRolesList,
             };
 
-            return View(model);
+            return View(modal);
+
         }
 
         //POST: /Manage/EditRole/
@@ -404,35 +419,28 @@ namespace Logistics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeRole(FormCollection form)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            // Get User Details
+            IdentityUser user = UserManager.FindByEmail(form["user-email"]);
+            string userId = user.Id;
+            string userRole = user.Roles.FirstOrDefault().RoleId;
 
-            var user = UserManager.FindByEmail(form["userid"]);
-            var userRole = user.Roles.FirstOrDefault().RoleId;
-            var findRole = roleManager.FindById(userRole);
-            string oldRole = findRole.Name;
-            var newRole = form["RoleList"].ToString();
-            string role = roleManager.FindById(newRole).Name;
+            // Find Old Role
+            IdentityRole findOldRole = _roleManager.FindById(userRole);
+            string oldRole = findOldRole.Name;
 
-            if (oldRole != role)
-            {
-                UserManager.RemoveFromRole(user.Id, oldRole);
-                UserManager.AddToRole(user.Id, role);
-            }
+            // Get New Role
+            string selectedRole = form["RoleList"].ToString();
+            IdentityRole findNewRole = _roleManager.FindById(selectedRole);
+            string newRole = findNewRole.Name;
 
-            var updatedUser = new ManageUsersViewModel
-            {
-                UserId = user.Id,
-                Username = user.UserName,
-                Email = user.Email,
-                Role = user.Roles.ToList()[0].RoleId
-            };
+            // Update Role in Db
+            _identityRepo.SaveRole(userId, oldRole, newRole);
 
             return RedirectToAction("ManageUsers", "Manage");
         }
 
-                     
+        #endregion
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

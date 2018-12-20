@@ -24,7 +24,7 @@
             <br />
             <p class="pt-20">Users Role: @Html.DropDownListFor(m => m.RoleList, ViewBag.allRolesList as SelectList, "-- Change Role --")</p>
 
-            <input type="hidden" name="userid" value="@Model.Email" />
+            <input type="hidden" name="user-email" value="@Model.Email" />
 
             <button type="submit" class="btn btn-success pt-10">Save</button>
         }
