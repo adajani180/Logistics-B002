@@ -439,6 +439,28 @@ namespace Logistics.Controllers
             return RedirectToAction("ManageUsers", "Manage");
         }
 
+        //GET: /Manage/DeleteUser/<user>
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser(string id)
+        {
+            var user = _identityRepo.Get(id);
+            return View(user);
+        }
+
+        //POST: /Manage/DeleteUser/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser(FormCollection form)
+        {
+            IdentityUser user = _identityRepo.Get(form["user-delete"]);
+
+            _identityRepo.DeleteAsync(user);
+            
+            return RedirectToAction("ManageUsers", "Manage");
+        }
+
+
         #endregion
 
         #region Helpers

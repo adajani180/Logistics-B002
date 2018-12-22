@@ -950,8 +950,8 @@ namespace Logistics
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(col => cellCssClassExpression)
                         .WithValueExpression(per => per.Id.ToString())
-                        .WithValueTemplate("<a href='/Manage/EditRole/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" 
-                           //+ "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>"
+                        .WithValueTemplate("<a href='/Manage/EditRole/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;"
+                           + "<a href='/Manage/DeleteUser/{Value}' id='btn-delete' class='btn btn-danger btn-xs'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>"
                            );
                 })
                 .WithSorting(sorting: true, defaultSortColumn: "Username", defaultSortDirection: SortDirection.Asc)

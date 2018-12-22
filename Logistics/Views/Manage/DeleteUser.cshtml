@@ -1,0 +1,24 @@
+﻿@model Logistics.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete @Model.UserName?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color pt-5">
+            <input type="hidden" name="user-delete" value="@Model.Id" />
+            <input type="submit" value="Delete" class="btn btn-default btn-danger" /> |
+            @Html.ActionLink("Back to List", "ManageUsers")
+        </div>
+    }
+</div>
