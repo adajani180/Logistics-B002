@@ -89,14 +89,22 @@ namespace Logistics.Repositories.Identity
         // Deletes a User if passed an Identity User Object
         public void Delete(IdentityUser entity)
         {
-            string userId = this.Get(entity.Id).ToString();
-            ApplicationUser user = _userManager.FindById(userId);
+            ApplicationUser user = _userManager.FindById(entity.Id);
+            var roles = _userManager.GetRoles(user.Id);
 
-            if (this.context.Entry(entity).State == EntityState.Detached)
-                this.context.Set<IdentityUser>().Attach(entity);
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                if (roles.Count() > 0)
+                {
+                    foreach (var item in roles.ToList())
+                    {
+                        var result = _userManager.RemoveFromRole(user.Id, item);
+                    }
+                }
 
-            this.context.Users.Remove(user);
-            this.context.SaveChanges();
+                //Delete User
+                _userManager.Delete(user);
+            }
         }
 
         // Deletes and User if passed and id or other partial object.

@@ -455,7 +455,7 @@ namespace Logistics.Controllers
         {
             IdentityUser user = _identityRepo.Get(form["user-delete"]);
 
-            _identityRepo.DeleteAsync(user);
+            _identityRepo.Delete(user);
             
             return RedirectToAction("ManageUsers", "Manage");
         }
