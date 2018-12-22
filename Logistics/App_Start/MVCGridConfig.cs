@@ -20,6 +20,7 @@ namespace Logistics
     using System.Linq.Expressions;
     using Logistics.Repositories.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Logistics.Models;
 
     public static class MVCGridConfig 
     {
@@ -923,6 +924,9 @@ namespace Logistics
 
         private static MVCGridBuilder<IdentityUser> BuildManageUsersGrid(GridDefaults gridDefaults)
         {
+            IdentityRepository repo = new IdentityRepository();
+            RoleManager _roleManager = new RoleManager();
+
             return new MVCGridBuilder<IdentityUser>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
@@ -941,13 +945,14 @@ namespace Logistics
                         .WithHeaderText("Role")
                         .WithSorting(true)
                         .WithFiltering(true)
-                        .WithValueExpression(user => user.Roles.ToString());
+                    .WithValueExpression(user => _roleManager.FindByIdAsync(user.Roles.SingleOrDefault().RoleId).Result.Name);
                     cols.Add("Actions")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(col => cellCssClassExpression)
                         .WithValueExpression(per => per.Id.ToString())
-                        .WithValueTemplate("<a href='/Manage/EditRole/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
-                            jqueryDeleteButton);
+                        .WithValueTemplate("<a href='/Manage/EditRole/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" 
+                           //+ "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>"
+                           );
                 })
                 .WithSorting(sorting: true, defaultSortColumn: "Username", defaultSortDirection: SortDirection.Asc)
                 .WithPaging(true, gridDefaults.ItemsPerPage)
@@ -957,12 +962,18 @@ namespace Logistics
                     var options = context.QueryOptions;
                     string search = options.GetFilterString("Username");
 
-                    IdentityRepository IRepo = new IdentityRepository();
                     IEnumerable<IdentityUser> Identity = null;
+                    IdentityRole Role;
+
                     if (!string.IsNullOrEmpty(search))
-                        Identity = IRepo.Find(user => user.Id.Contains(search));
+                    {
+                        Identity = repo.Find(user => user.Id.Contains(search));
+                    }
                     else
-                        Identity = IRepo.GetAll();
+                    {
+                        Identity = repo.GetAll();
+                        Role = repo.GetRole(Identity);
+                    }
 
                     QueryResult<IdentityUser> results = new QueryResult<IdentityUser>()
                     {
@@ -984,7 +995,7 @@ namespace Logistics
                     results.Items = Identity.ToList<IdentityUser>();
 
                     return results;
-                });
+                });                
         }
 
         #endregion
