@@ -260,6 +260,7 @@
     <Compile Include="Repositories\Personnel\EmailRepository.cs" />
     <Compile Include="Repositories\Personnel\AddressRepository.cs" />
     <Compile Include="Repositories\Personnel\PersonnelRepository.cs" />
+    <Compile Include="Repositories\Transaction\TransactionRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

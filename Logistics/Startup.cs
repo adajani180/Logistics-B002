@@ -14,7 +14,7 @@ namespace Logistics
         {
             ConfigureAuth(app);
             CreateRolesandUsers();
-            CreateAdmin();
+            //CreateAdmin();
             //AddToAdmin();
         }
 
@@ -52,60 +52,60 @@ namespace Logistics
         /// <summary>
         /// Create an Admin user if doesnt exist.
         /// </summary>
-        private void CreateAdmin()
-        {
-            var user = new ApplicationUser
-            {
-                UserName = "Admin",
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                TwoFactorEnabled = false,
-                LockoutEnabled = false,
-                AccessFailedCount = 0
-            };
+        //private void CreateAdmin()
+        //{
+        //    var user = new ApplicationUser
+        //    {
+        //        UserName = "Admin",
+        //        EmailConfirmed = true,
+        //        PhoneNumberConfirmed = true,
+        //        TwoFactorEnabled = false,
+        //        LockoutEnabled = false,
+        //        AccessFailedCount = 0
+        //    };
 
-            using (var cxt = new ApplicationDbContext())
-            {
-                try
-                {
-                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(cxt));
-                    var admin = userManager.FindByName(user.UserName);
-                    if (admin == null)
-                    {
-                        var result = userManager.Create(user, "satisapp");
-                        if (result.Succeeded)
-                        {
-                            userManager.AddToRole(user.Id, "Admin");
-                            cxt.SaveChanges();
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-        }
+        //    using (var cxt = new ApplicationDbContext())
+        //    {
+        //        try
+        //        {
+        //            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(cxt));
+        //            var admin = userManager.FindByName(user.UserName);
+        //            if (admin == null)
+        //            {
+        //                var result = userManager.Create(user, "satisapp");
+        //                if (result.Succeeded)
+        //                {
+        //                    userManager.AddToRole(user.Id, "Admin");
+        //                    cxt.SaveChanges();
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw e;
+        //        }
+        //    }
+        //}
 
-        private void AddToAdmin()
-        {
-            ApplicationDbContext context = new ApplicationDbContext();
+        //private void AddToAdmin()
+        //{
+        //    ApplicationDbContext context = new ApplicationDbContext();
 
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            string userName = "Ahmed";
-            string roleName = "Admin";
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    string userName = "Ahmed";
+        //    string roleName = "Admin";
 
-            try
-            {
-                var user = UserManager.FindByName(userName);
-                UserManager.AddToRole(user.Id, roleName);
-                context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
+        //    try
+        //    {
+        //        var user = UserManager.FindByName(userName);
+        //        UserManager.AddToRole(user.Id, roleName);
+        //        context.SaveChanges();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //}
     }
 
     
