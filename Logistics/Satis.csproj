@@ -221,6 +221,7 @@
     <Compile Include="Entities\Exam\ExamResult.cs" />
     <Compile Include="Entities\Location\Location.cs" />
     <Compile Include="Entities\Personnel\Person.cs" />
+    <Compile Include="Entities\Transaction\Transaction.cs" />
     <Compile Include="Exceptions\SessionExpiredException.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationContext.cs" />
     <Compile Include="Models\PersonnelContext.cs" />
+    <Compile Include="Models\TransactionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorLogRepository.cs" />
     <Compile Include="Repositories\AdminRepository.cs" />
