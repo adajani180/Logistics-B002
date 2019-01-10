@@ -56,6 +56,9 @@ namespace Logistics
 
             MVCGridDefinitionTable.Add("ManageUsers", BuildManageUsersGrid(gridDefaults));
 
+            MVCGridDefinitionTable.Add("Manage Transactions", BuildTransactionsGrid(gridDefaults));
+
+
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
