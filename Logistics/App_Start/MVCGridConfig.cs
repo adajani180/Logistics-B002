@@ -11,6 +11,7 @@ namespace Logistics
     using Logistics.Entities.Appointment;
     using Logistics.Entities.Contact;
     using Logistics.Entities.Personnel;
+    using Logistics.Entities.Transaction;
     using Logistics.Repositories;
     using MVCGrid.Models;
     using MVCGrid.Web;
@@ -996,6 +997,66 @@ namespace Logistics
 
                     return results;
                 });                
+        }
+
+        #endregion
+
+
+        #region Transactions
+
+        private static MVCGridBuilder<Transaction> BuildTransactionsGrid(GridDefaults gridDefaults)
+        {
+            return new MVCGridBuilder<Transaction>(gridDefaults)
+                .WithAuthorizationType(AuthorizationType.AllowAnonymous)
+                .AddColumns(cols =>
+                {
+                    cols.Add("Item Number")
+                        .WithSorting(true)
+                        .WithFiltering(true)
+                        .WithValueExpression(item => item.ItemNum.ToString()); // use the Value Expression to return the cell text for this column
+                    cols.Add("Quantity")
+                        .WithValueExpression( q => q.Qty.ToString() );
+                    //cols.Add("Status")
+                    //    .WithValueExpression(sysUser => sysUser.StatusLookup?.Name);
+                    //cols.Add("Actions")
+                    //    .WithHtmlEncoding(false)
+                    //    .WithCellCssClassExpression(col => cellCssClassExpression)
+                    //    .WithValueExpression(sysUser => sysUser.Id.ToString())
+                    //    .WithValueTemplate("<a href='/Admin/UserProfile/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
+                    //        "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>");
+                })
+                .WithSorting(sorting: true, defaultSortColumn: "Item", defaultSortDirection: SortDirection.Asc)
+                .WithPaging(true, gridDefaults.ItemsPerPage)
+                .WithFiltering(true)
+                .WithRetrieveDataMethod((context) =>
+                {
+                    var options = context.QueryOptions;
+                    string search = options.GetFilterString("Item");
+
+                    TransactionRepository transRepo = new TransactionRepository();
+                    IEnumerable<Transaction> allTransactions = transRepo.GetAll();
+
+                    QueryResult<Transaction> results = new QueryResult<Transaction>()
+                    {
+                        TotalRecords = allTransactions.Count()
+                    };
+
+                    // sorting
+                    switch (options.SortColumnName)
+                    {
+                        case "Item":
+                            allTransactions = options.SortDirection == SortDirection.Dsc ?
+                                allTransactions.OrderByDescending(item => item.ItemNum) : allTransactions.OrderBy(item => item.ItemNum);
+                            break;
+                    }
+
+                    // paging
+                    allTransactions = Paginate<Transaction>(allTransactions, options);
+
+                    results.Items = allTransactions.ToList<Transaction>();
+
+                    return results;
+                });
         }
 
         #endregion
