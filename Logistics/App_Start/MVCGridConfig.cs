@@ -56,7 +56,7 @@ namespace Logistics
 
             MVCGridDefinitionTable.Add("ManageUsers", BuildManageUsersGrid(gridDefaults));
 
-            MVCGridDefinitionTable.Add("Manage Transactions", BuildTransactionsGrid(gridDefaults));
+            MVCGridDefinitionTable.Add("ManageTransactions", BuildTransactionsGrid(gridDefaults));
 
 
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
@@ -1019,14 +1019,20 @@ namespace Logistics
                         .WithValueExpression(item => item.ItemNum.ToString()); // use the Value Expression to return the cell text for this column
                     cols.Add("Quantity")
                         .WithValueExpression( q => q.Qty.ToString() );
-                    //cols.Add("Status")
-                    //    .WithValueExpression(sysUser => sysUser.StatusLookup?.Name);
-                    //cols.Add("Actions")
-                    //    .WithHtmlEncoding(false)
-                    //    .WithCellCssClassExpression(col => cellCssClassExpression)
-                    //    .WithValueExpression(sysUser => sysUser.Id.ToString())
-                    //    .WithValueTemplate("<a href='/Admin/UserProfile/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
-                    //        "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>");
+                    cols.Add("Employee")
+                        .WithValueExpression(user => user.EmpId);
+                    cols.Add("Transaction Date")
+                        .WithValueExpression(date => date.ModifiedDate.ToShortDateString());
+                    cols.Add("Type")
+                        .WithValueExpression(t => t.TransactionType);
+                    cols.Add("Modified By")
+                        .WithValueExpression(user => user.ModifiedBy);
+                    cols.Add("Actions")
+                        //.WithHtmlEncoding(false)
+                        //.WithCellCssClassExpression(col => cellCssClassExpression)
+                        //.WithValueExpression(sysUser => sysUser.Id.ToString())
+                        .WithValueTemplate("<a href='#' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
+                            "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>");
                 })
                 .WithSorting(sorting: true, defaultSortColumn: "Item", defaultSortDirection: SortDirection.Asc)
                 .WithPaging(true, gridDefaults.ItemsPerPage)
