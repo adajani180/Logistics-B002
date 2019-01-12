@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Logistics.Entities.Transaction;
+using Logistics.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,9 @@ namespace Logistics.Areas.Transactions.Controllers
 {
     public class ManageController : Controller
     {
+        TransactionRepository _repo = new TransactionRepository();
+
+
         // GET: Transactions/Manage
         public ActionResult Index()
         {
@@ -21,8 +26,14 @@ namespace Logistics.Areas.Transactions.Controllers
         }
 
         // GET: Transactions/Manage/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            //var modal = new Transaction
+            //{
+            //    ItemNum = _repo.Get(id).ItemNum,
+
+            //};   
+
             return View();
         }
 

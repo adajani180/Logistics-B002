@@ -1467,6 +1467,7 @@
     <Content Include="Areas\Transactions\Views\Manage\Index.cshtml" />
     <Content Include="Areas\Transactions\Views\web.config" />
     <Content Include="Areas\Transactions\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Transactions\Views\Manage\Create.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
