@@ -58,7 +58,6 @@ namespace Logistics
 
             MVCGridDefinitionTable.Add("ManageTransactions", BuildTransactionsGrid(gridDefaults));
 
-
             MVCGridDefinitionTable.Add("Exams", new MVCGridBuilder<Exam>(gridDefaults)
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
@@ -251,7 +250,8 @@ namespace Logistics
                         .WithCellCssClassExpression(col => cellCssClassExpression)
                         .WithValueExpression(wh => wh.Id.ToString())
                         .WithValueTemplate("<a href='/Inventory/Assets/Details/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Edit</span></a>&nbsp;" +
-                            "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>");
+                            "<a id='btn-delete' class='btn btn-danger btn-xs' data-id='{Value}'><i class='fa fa-trash fa-fw text-danger hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Delete</span></a>" +
+                            "<a href ='/Transactions/Manage/Create/{Value}' class='btn btn-primary btn-xs'><i class='fa fa-edit fa-fw text-primary hidden-lg hidden-md hidden-sm'></i> <span class='hidden-xs'>Issue</span></a>");
                 })
                 .WithSorting(sorting: true, defaultSortColumn: "Name", defaultSortDirection: SortDirection.Asc)
                 .WithPaging(true, gridDefaults.ItemsPerPage)
@@ -1018,7 +1018,7 @@ namespace Logistics
                         .WithFiltering(true)
                         .WithValueExpression(item => item.ItemNum.ToString()); // use the Value Expression to return the cell text for this column
                     cols.Add("Quantity")
-                        .WithValueExpression( q => q.Qty.ToString() );
+                        .WithValueExpression(q => q.Qty.ToString());
                     cols.Add("Employee")
                         .WithValueExpression(user => user.EmpId);
                     cols.Add("Transaction Date")
