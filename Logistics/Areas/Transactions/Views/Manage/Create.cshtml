@@ -1,0 +1,46 @@
+﻿@model Logistics.Models.TransactionContext
+
+@{
+    ViewBag.Title = "Create Transaction";
+}
+
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h2>@ViewBag.Title</h2>
+        <br />
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        <h4>Update Transactions</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("Create", "Manage", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="itemName" class="col-sm-2 control-label">Item</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="itemName" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="EmpId" class="col-sm-2 control-label">Assign to</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="assignTo" placeholder="">
+                </div>
+            </div>
+
+            <input type="hidden" name="itemID" value="@ViewContext.RouteData.Values" />
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
